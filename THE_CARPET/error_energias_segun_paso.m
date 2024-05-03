@@ -5,10 +5,8 @@ function error_energias_segun_paso(N_values, Vpot, a, b, numerovec,hbar,m,omega)
     % Calcular el error para cada valor de N
     for i = 1:length(N_values)
         % Calcular las soluciones numéricas y analíticas
-        [energies, vec, h, x, z] = Diferenciasfinitas_oscilador(Vpot, a, b, N_values(i), numerovec,hbar,m,omega);
-        vecnorm = normalizacion(vec, energies, numerovec, N_values(i));
+        [energies,~, h, x, z] = Diferenciasfinitas_oscilador(Vpot, a, b, N_values(i), numerovec,hbar,m,omega);
         [energies_anal] = energiasoscilador_analiticas(numerovec,hbar,omega);
-
         % hago la resta de las energias numericas - las analiticas y me
         % queda un vector fila con esta diferencia 
         errorvector = abs(transpose(energies)-energies_anal);
