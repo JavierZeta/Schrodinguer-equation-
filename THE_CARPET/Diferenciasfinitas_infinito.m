@@ -44,7 +44,7 @@ H= -T / (2 * h^2) + V;
 
 % Normalización de las energías
 z = z(1:numerovec);
-energies = val(z) / val(z(1));
+energies = val(z);
 disp(energies);
 
 
