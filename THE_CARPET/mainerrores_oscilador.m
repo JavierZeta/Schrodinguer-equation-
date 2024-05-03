@@ -17,6 +17,7 @@ else
 N_values = minN:maxN; %crea un vector que contiene todos los números enteros desde minN hasta maxN
 error_energias_segun_paso(N_values, Vpot, a, b, numerovec,hbar,m,omega);
 
+[average_error]=error_funciones_segun_paso(N_values, Vpot, a, b, numerovec,hbar,m,omega);
 %error funciones
 
 end
