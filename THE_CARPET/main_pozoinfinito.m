@@ -12,12 +12,12 @@ area = regla_Simpson(vec,h,numerovec); %vector de areas, guarda las areas de cad
 
 [vecnorm]=normalizacion(vec,area,numerovec,N);
 
-%solución analítica
+%PLOT SOL. ANALITICAS JUNTAS
 
     figure
     hold on
 for i=1:numerovec
-    f=@(x) (sqrt(2/b))*sin(((i)*pi/b)*x);
+    f=@(x) (sqrt(2/(b-a)))*sin(((i)*pi/(b-a))*x);
     plot(v,f(v),'Linewidth',2,'DisplayName', sprintf('\\psi_%d', i-1));
     legend
 end
@@ -27,9 +27,26 @@ end
     axis tight
     hold off
 
+%PLOT SOL. NUMÉRICAS JUNTAS
 
+% Ploteamos las funciones 
+figure
+for i = 1:length(z)
+    y = [0; vec(:, z(i)); 0];
+    plot(v, y, 'LineWidth', 1, 'DisplayName', num2str(i-1));
+    hold on;
+end
+xlabel('x', 'FontSize', 14)
+ylabel('\psi(x)', 'FontSize', 14)
+legend
+title('Soluciones numéricas normalizadas según el nivel de energía', 'FontSize', 14)
+axis tight
+hold off;
+
+
+%PLOTS SOLUCION ANALITICA VS NUMERICA POR NIVEL DE ENRGÍA
 for i=1:numerovec
-    f=@(x) (sqrt(2/b))*sin(((i)*pi/b)*x);
+    f=@(x) (sqrt(2/(b-a)))*sin(((i)*pi/(b-a))*x);
 
     figure(i+2)
     hold on
@@ -48,13 +65,13 @@ for i=1:numerovec
     hold off
 end
 
-error = calculo_error_infinito(v,vecnorm,numerovec,b);
+error = calculo_error_infinito(v,vecnorm,numerovec,b,a);
 
 energias=zeros(numerovec,1);
 
 for i=1 : numerovec
 
-    energias(i)=((i^2 * pi^2) / (2 * b^2));
+    energias(i)=((i^2 * pi^2) / (2 * (b-a)^2));
 
 end
 
