@@ -43,16 +43,6 @@ end
 % Normalización de las energías
 z = z(1:numerovec);
 energies = val(z);
-disp(energies)
-% Ploteamos las funciones 
-figure
-for i = 1:length(z)
-    y = [0; vec(:, z(i)); 0];
-    plot(x, y, 'LineWidth', 3, 'DisplayName', num2str(i-1));
-    hold on;
+
 end
-xlabel('x', 'FontSize', 14)
-ylabel('\psi(x)', 'FontSize', 14)
-legend
-title('Normalized wavefunctions for a harmonic oscillator using finite difference method', 'FontSize', 14)
-hold off;
+
