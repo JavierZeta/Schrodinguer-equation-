@@ -1,0 +1,22 @@
+\babel@toc {spanish}{}\relax 
+\contentsline {section}{\numberline {1}Introducción}{2}{}%
+\contentsline {subsection}{\numberline {1.1}Deducción de la ecuación de Schrödinger independiente del tiempo}{2}{}%
+\contentsline {subsection}{\numberline {1.2}Interpretación de la ecuación de Schrödinger y sus soluciones}{2}{}%
+\contentsline {section}{\numberline {2}Métodos de derivación numérica}{4}{}%
+\contentsline {subsection}{\numberline {2.1}Método de las diferencias finitas}{4}{}%
+\contentsline {subsubsection}{\numberline {2.1.1}Diferencial de primer orden}{4}{}%
+\contentsline {subsubsection}{\numberline {2.1.2}Diferencial de segundo orden}{6}{}%
+\contentsline {subsubsection}{\numberline {2.1.3}Error de aproximación en el método de las diferencias finitas}{7}{}%
+\contentsline {subsection}{\numberline {2.2}Aproximación de la ecuación de Schrödinger}{7}{}%
+\contentsline {section}{\numberline {3}Métodos de integración numérica}{9}{}%
+\contentsline {subsection}{\numberline {3.1}Regla del punto medio}{9}{}%
+\contentsline {subsubsection}{\numberline {3.1.1}Regla del punto medio simple}{9}{}%
+\contentsline {subsubsection}{\numberline {3.1.2}Regla del punto medio compuesta}{11}{}%
+\contentsline {subsubsection}{\numberline {3.1.3}Error de aproximación en la regla del punto medio}{12}{}%
+\contentsline {subsection}{\numberline {3.2}Regla de los trapecios}{12}{}%
+\contentsline {subsubsection}{\numberline {3.2.1}Error de aproximación en la regla de los trapecios}{12}{}%
+\contentsline {subsection}{\numberline {3.3}Regla de Simpson}{12}{}%
+\contentsline {subsubsection}{\numberline {3.3.1}Regla de Simpson simple}{13}{}%
+\contentsline {subsubsection}{\numberline {3.3.2}Generalización de la regla de Simpson simple}{14}{}%
+\contentsline {subsubsection}{\numberline {3.3.3}Regla de Simpson compuesta}{15}{}%
+\contentsline {subsubsection}{\numberline {3.3.4}Error de aproximación en la regla de Simpson}{15}{}%
