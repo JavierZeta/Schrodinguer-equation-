@@ -400,13 +400,13 @@ Si recopilamos los errores de este método de derivación numérica obtenemos:
 	\subsection{Aproximación de la ecuación de Schrödinger}
 Si ahora aplicamos esto a nuestra ecuación de Schrödinger:
 \begin{equation*}
-	\frac{\hbar^2}{2m} \frac{\partial^2\psi}{\partial x^2} + V(x)\psi = E \psi
+	-\frac{\hbar^2}{2m} \frac{\partial^2\psi}{\partial x^2} + V(x)\psi = E \psi
 \end{equation*}
 
 Podemos sustituir la derivada segunda por nuestra aproximación, quedando de la siguiente manera:
 
 \begin{equation}
-	\frac{\hbar^2}{2m} \frac{\psi_{i+1}(x)-\psi_i(x)+\psi_{i-1}(x)}{h^2} + V_i(x)\psi_i = E \psi_i(x)
+	-\frac{\hbar^2}{2m} \frac{\psi_{i+1}(x)-\psi_i(x)+\psi_{i-1}(x)}{h^2} + V_i(x)\psi_i = E \psi_i(x)
 \end{equation}
 
 Ahora debemos determinar un intervalo $[a,b]$ que será la región donde resolveremos 
@@ -418,14 +418,14 @@ Nuestra matriz de energía cinética será:
 
 \begin{equation}
 	T=\frac{-\hbar^2}{2m} \left(
-	\begin{matrix}
-		-2 & 1 & 0 & 0 &  \cdots & 0 \\
-		1 & -2 & 1 & 0 & \cdots & 0\\
-		0 & 1 & -2 & 1 & \cdots & 0\\
-		\vdots & \vdots&\ddots &\ddots &\ddots& \vdots \\
-		0 & 0   &\cdots &1& -2 & 1 \\
-		0 & 0 & 0  &\cdots & 1 & -2 \\
-	\end{matrix}
+  \begin{matrix}
+  \frac{-2}{h^2} & \frac{1}{h^2} & 0 & 0 &  \cdots & 0 \\
+  \frac{1}{h^2} & \frac{-2}{h^2} & \frac{1}{h^2} & 0 & \cdots & 0\\
+  0 & \frac{1}{h^2} & \frac{-2}{h^2} & \frac{1}{h^2} & \cdots & 0\\
+  \vdots & \vdots&\ddots &\ddots &\ddots& \vdots \\
+  0 & 0   &\cdots &\frac{1}{h^2}& \frac{-2}{h^2} & \frac{1}{h^2} \\
+  0 & 0 & 0  &\cdots & \frac{1}{h^2} & \frac{-2}{h^2} \\
+  \end{matrix}
 	\right)
 \end{equation}
 
@@ -453,12 +453,12 @@ Haciendo esto obtenemos el siguiente sistema lineal: \\
 \begin{equation*}
 	\frac{-\hbar^2}{2m} \left(
 	\begin{matrix}
-		-2 & 1 & 0 & 0 &  \cdots & 0 \\
-		1 & -2 & 1 & 0 & \cdots & 0\\
-		0 & 1 & -2 & 1 & \cdots & 0\\
-		\vdots & \vdots&\ddots &\ddots &\ddots& \vdots \\
-		0 & 0   &\cdots &1& -2 & 1 \\
-		0 & 0 & 0  &\cdots & 1 & -2 \\
+  \frac{-2}{h^2} & \frac{1}{h^2} & 0 & 0 &  \cdots & 0 \\
+  \frac{1}{h^2} &  \frac{-2}{h^2} & \frac{1}{h^2} & 0 & \cdots & 0\\
+  0 & \frac{1}{h^2} &  \frac{-2}{h^2} & \frac{1}{h^2} & \cdots & 0\\
+  \vdots & \vdots&\ddots &\ddots &\ddots& \vdots \\
+  0 & 0   &\cdots &\frac{1}{h^2}&  \frac{-2}{h^2} & \frac{1}{h^2} \\
+  0 & 0 & 0  &\cdots & \frac{1}{h^2} &  \frac{-2}{h^2} \\
 	\end{matrix}
 	\right)
 	\left(
