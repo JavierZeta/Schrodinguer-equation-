@@ -4,16 +4,17 @@ function [average_error]=error_funciones_segun_paso(N_values, Vpot, a, b, numero
     '1: Trapecios\n' ...
     '2: Simpson\n' ]);
      average_error = zeros(length(N_values), 1);
+     h= zeros(length(N_values), 1);
     % Calcular el error para cada valor de N
     for i = 1:length(N_values)
         % Calcular las soluciones numéricas y analíticas
-        [~, vec, h, ~, ~] = Diferenciasfinitas_oscilador(Vpot, a, b, N_values(i), numerovec,hbar,m,omega);
+        [~, vec, h(i), ~, ~] = Diferenciasfinitas_oscilador(Vpot, a, b, N_values(i), numerovec,hbar,m,omega);
 
         if  flag==1
-            area = regla_trapecizoidal(vec,h,numerovec);
+            area = regla_trapecizoidal(vec,h(i),numerovec);
         
         elseif flag==2
-            area = regla_Simpson_oscilador(vec,h,numerovec);
+            area = regla_Simpson_oscilador(vec,h(i),numerovec);
         else
             return;
         end
@@ -43,12 +44,12 @@ function [average_error]=error_funciones_segun_paso(N_values, Vpot, a, b, numero
     hold on;
 
     % Trazar el error en función de N
-    plot(log(N_values), log(average_error), 'DisplayName', 'Error');
+    plot(log(h), log(average_error), 'DisplayName', 'Error');
 
     % Añadir etiquetas y leyenda
-    xlabel('log(N)');
+    xlabel('log(h)');
     ylabel('log(Error)');
-    title('Funciones error del método en función de N');
+    title('Funciones error del método en función del paso');
     legend;
     hold off;
 
@@ -56,11 +57,12 @@ function [average_error]=error_funciones_segun_paso(N_values, Vpot, a, b, numero
     hold on;
 
     % Trazar el error en función de N
-    plot(N_values, average_error, 'DisplayName', 'Error');
+    plot(h, average_error, 'DisplayName', 'Error');
 
     % Añadir etiquetas y leyenda
-    xlabel('N');
+    xlabel('h');
     ylabel('Error');
-    title('Funciones error del método en función de N');
+    title('Funciones error del método en función del paso');
     legend;
     hold off;
+
