@@ -538,7 +538,7 @@ $y'(x)=f(x) \hspace{2.5mm} ; \hspace{2.5mm} y(a)=0$\\
 Es decir, encontrar $y(b)$ equivale a hallar el valor de la integral. \\
 
 Sin embargo, en este artículo no nos vamos a centrar en este enfoque, si no que vamos a centrarnos en métodos para aproximar la primera integral descrita.
-En concreto, vamos a centrarnos en las reglas \textbf{del Punto Medio}, la de los \textbf{trapecios} y la regla \textbf{Simpson}. \\
+En concreto, vamos a centrarnos en las reglas de los \textbf{trapecios} y la regla \textbf{Simpson}. \\
 
 Todos estos métodos de integración están basados en funciones de interpolación.
 Con lo cual, conviene describir qué es un método de integración basado en funciones de interpolación.\\
@@ -546,176 +546,6 @@ Con lo cual, conviene describir qué es un método de integración basado en fun
 \underline{\textbf{Métodos basados en funciones de interpolación}} \\
 
 Esta familia de métodos se basa en aproximar la función dada $f(x)$ por otra función $g(x)$ la cual conocemos el valor de su integral. Para  construir esta función, se la hace pasar por un cierto número de puntos en los que f y g tienen el mismo valor. Usualmente intentamos que $g(x)$ sea un polinomio para simplificar el cálculo de su primitiva.
-
-\subsection{Regla del punto medio}
-
-Usando la regla del punto medio, aproximamos el valor de la integral mediante el valor de la función f en el punto medio de un intervalo definido. \\
-
-Existen dos reglas del punto medio dependiendo de la cantidad de divisiones que hagamos en el intervalo: La regla del punto medio \textbf{simple} y la \textbf{compuesta}.
-
-\subsubsection{Regla del punto medio simple}
-
-La integral se aproxima como:
-
-\begin{equation}
-\int_{a}^{b} f(x) \,dx \approx (b-a)f\left(\frac{a+b}{2}\right)  
-\end{equation}
-
-Donde el error cometido en la aproximación es:
-\begin{equation}
-E = \frac{f''(\xi)}{24} (b - a){^3}
-\end{equation}
-Con $\xi \in (a,b)$. \\
-
-A continuación, vamos a demostrar este resultado:\\
-
-\underline{\textbf{Demostración de la regla del punto medio simple}} \\
-
-Antes de comenzar, para esta demostración será necesario definir  el Teorema del Valor Medio para Integrales (TVMI). Este teorema postula que:\\ 
-
-Sean $f,g \in C([a,b])$ tal que g no cambia de signo en [a,b]. Entonces existe un $\xi (a,b)$ tal que:
-
-\begin{equation}
-\int_{a}^{b} f(x)g(x) \,dx =f(\xi)\int_{a}^{b} g(x) \,dx 
-\end{equation}
-
-Una vez definido, ya podemos empezar con la demostración: \\
-
-Vamos a comenzar desarrollando por Taylor alrededor del punto
-$x_0=\frac{a+b}{2}$:
-\begin{equation}
-f(x)=f(x_0)+f'(x_0)(x-x_0)+\frac{f''(\theta_x)}{2}(x-x_0){^2} 
-\end{equation}
-Con $\theta_x \in (x_0,x)$. \\
-
-Integrando obtenemos: 
-\begin{equation}
-\int_{a}^{b} f(x) \,dx=(b-a)f(x_0)+\int_{a}^{b} f'(x_0)(x-x_0) \,dx+\int_{a}^{b} \frac{f''(\theta_x)}{2} (x-x_0){^2} \,dx       
-\end{equation}
-
-Como la primera integral del lado derecho de la igualdad se anula, al final obtenemos:
-
-\begin{align}
-\int_{a}^{b} f(x) \,dx= \notag \\
-&=(b-a)f(x_0)+\int_{a}^{b} \frac{f''(\theta_x)}{2} (x-x_0){^2} \,dx= \notag \\
-&=(b-a)f(\frac{a+b}{2})+\frac{f''(\xi)}{2}\int_{a}^{b} (x-x_0){^2} \,dx= \notag \\
-&=(b-a)f(\frac{a+b}{2})+\frac{f''(\xi)}{24}(b-a){^3} 
-\end{align}
-
-Quedando demostrada la fórmula. Sin embargo,  para la segunda igualdad, hemos aplicado el ~TVMI. Con lo cual, también tenemos que demostrar ese paso: \\
-
-Vamos a suponer, sin pérdida de generalidad, que 
-$g(x)\geq 0,\;\forall\, x \in (a,b)$. \\
-
-Como f es continua en [a,b], por el Teorema de Weierstrass, f alcanza un máximo y un mínimo en el intervalo. Además:
-
-\begin{center}
-$m =\min_{x \in (a,b)}f(x) \leq f(x) \leq M =\max_{x \in (a,b)}f(x) \;, \forall\, x \in (a,b)$.
-\end{center}
-
-Como g es positiva, entonces:
-$g(x)m \leq g(x)f(x) \leq g(x)M\quad ,\forall\, x \in (a,b)$ \\
-
-Integrando y despejando tenemos:
-
-\begin{equation}
-m \leq \frac{\int_{a}^{b} f(x)g(x) \,dx }{\int_{a}^{b} g(x) \,dx } \leq M 
-\end{equation}
-
-Pero, como f es continua en [a,b], por el teorema de Darboux f toma todos  valores entre el mínimo m y el máximo M.  Esto significa que $\exists\; \xi \in (a,b)$ tal que:
-
-\begin{equation}
-f(\xi)=\frac{\int_{a}^{b} f(x)g(x) \,dx }{\int_{a}^{b} g(x) \,dx }
-\end{equation}
-
-Dando así por finalizada toda la demostración.\\
-
-\subsubsection{Regla del punto medio compuesta}
-
-Para obtener un resultado preciso usando este método, es necesario repetir el procedimiento N veces. Para ello, tenemos que  dividir el intervalo [a,b] en n subintervalos de igual longitud definidos por n+1 puntos. Entonces: $a=x_0<x_1<...<x_{n-1}<x_n=b$, por lo que $\Delta x=\frac{b-a}{n}$. \\
-
-Donde los puntos $x_j=a+\Delta x$; $y_j=f(x_j)$ con $(j=0,...,n)$ definen  rectángulos cuyas alturas se calculan en el punto medio del intervalo. \\
-
-Entonces, si aplicamos la definición de sumas de Riemann obtenemos:
-\begin{equation}
-\int_{a}^{b} f(x) \,dx \approx \sum_{j = 1}^{n} Area(R_j)=\sum_{j = 1}^{n} (x_j-x_{j-1})f(\frac{x_j-+x_{j-1}}{2} )   
-\end{equation}
-
-El error en la aproximación tiene una expresión que viene dada por:
-
-\begin{align}
-E_n=\left\lvert \int_{a}^{b} f(x) \,dx-M_n \right\rvert \leq \frac{K_2(b-a){^3}}{24n^2}= \notag \\
-&=\frac{K_2(b-a)}{24}(\Delta x){^2}\sim O(\Delta x^2)     
-\end{align}
-
-Donde $K_2=\max_{x \in [a,b]}\left\lvert f''(x) \right\rvert$
-y $M_n=\sum_{k = 1}^{n}f(\frac{x_{k-1}+x_k}{2})\Delta x \approx \int_{a}^{b} f(x) \,dx$ \\
-
-Cabe destacar que si $f(x)$ es lineal, entonces la regla del  punto medio compuesta es exacta. Antes de demostrarla merece la pena hablar un poco de  son las sumas de Riemann.\\
-
-\underline{\textbf{Sumas de Riemann}} \\
-
-La sumas de Riemann son un tipo de aproximación al valor de la integral mediante una suma finita, la cual se calcula dividiendo el área de integración típicamente en rectángulos y calculando el área de  cada uno de ellos para posteriormente sumar todas. \\
-\par
-Matemáticamente se describe como: 
-\begin{equation}
-\int_{a}^{b} f(x) \,dx \approx \sum_{k = 1}^{n} f(c_k)\Delta x_k   
-\end{equation}
-Donde $c_k$ son los puntos muestra que cumplen que $c_k \in [x_{k-1},x_k]$ y se pueden escribir como: $c_k=x_{k-1}+w_k\Delta x_k$ \;$w_k \in [0,1]$; $k=1,2,...,n$ \\
-
-Concretamente si $w_k=\frac{1}{2}\;\forall\,k$, tenemos la regla del punto medio.\\
-
-\underline{\textbf{Demostración de la regla del punto medio compuesta}}\\
-
-Vamos a comenzar dividendo nuestro intervalo [a,b] en n subintervalos definidos por n+1 puntos: 
-
-\begin{center}
-$a=x_0<x_1<...<x_{n-1}<x_n=b$, $\Delta x=\frac{b-a}{n} $ 
-\end{center}
-
-Entonces tenemos: 
-\begin{equation}
-\int_{a}^{b} f(x) \,dx=\sum_{k = 1}^{n}\int_{x_{k-1}}^{x_k} f(x) \,dx    
-\end{equation}
-
-Esencialmente, en cada intervalo $[x_{k-1},x_k]$ estamos aplicando la regla del punto medio simple. Con lo cual:
-
-\begin{align}
-\int_{a}^{b} f(x) \,dx= \notag \\
-&=\sum_{k = 1}^{n}[f(\frac{x_{k-1}+x_k}{2})\Delta x+\frac{f''(\xi_k)}{24}(\Delta x){^3}]= \notag \\
-&=\sum_{k = 1}^{n}f(\frac{x_{k-1}+x_k}{2})\Delta x + \sum_{k = 1}^{n}+\frac{f''(\xi_k)}{24}(\Delta x){^3}= \notag \\
-&=M_n+\frac{f''(\xi_k)}{24}+\sum_{k = 1}^{n}(\Delta x){^3}=M_n+\frac{f''(\xi_k)}{24}n(\Delta x){^3}
-\end{align}
-
-Sustituyendo el valor de $\Delta x$ obtenemos:
-
-\begin{equation}
-\int_{a}^{b} f(x) \,dx=M_n+\underbrace{\frac{f''(\xi_k)(b-a){^3}}{24n^2}}_{\text{error}}
-\end{equation}
-
-Por último, despejando el error y tomando valores absolutos obtenemos:
-
-\begin{align}
-E=\left\lvert \int_{a}^{b} f(x) \,dx-M_n \right\rvert= \notag \\
-&=\left\lvert \frac{f''(\xi_k)(b-a){^3}}{24n^2} \right\rvert= \notag \\
-&=\frac{(b-a){^3}}{24n^2}\left\lvert f''(\xi_k) \right\rvert\leq \notag \\
-&\leq \frac{K_2(b-a){^3}}{24n^2}=\frac{K_2(b-a)}{24}(\Delta x){^2}
-\end{align}
-
-Donde $K_2=\smash{\displaystyle\max_{x \in [a,b]}} |f''(x)|$. \\
-
-Dando así por finalizada la demostración. 
-
-\subsubsection{Error de aproximación en la regla del punto medio}
-
-A modo de recopilación, vamos recoger los errores de las variantes de esta regla:
-
-\begin{flushleft}
--Regla del punto medio simple: $E = \frac{f''(\xi)}{24} (b - a){^3}$\\
--Regla del punto medio compuesta: $E \leq \frac{K_2(b-a)}{24}(\Delta x){^2}$\\
-\end{flushleft}
-
-
 \subsection{Regla de los trapecios}
 
 WWEEEEOOOOOOOOOOONNNNNNN  	WWEEEEOOOOOOOOOOONNNNNNN  	WWEEEEOOOOOOOOOOONNNNNNN  	WWEEEEOOOOOOOOOOONNNNNNN  	WWEEEEOOOOOOOOOOONNNNNNN  	WWEEEEOOOOOOOOOOONNNNNNN  	WWEEEEOOOOOOOOOOONNNNNNN  	WWEEEEOOOOOOOOOOONNNNNNN  	WWEEEEOOOOOOOOOOONNNNNNN  
@@ -999,7 +829,97 @@ Una vez planteado el escenario, veamos las funciones de onda que describen a las
     \subsection{Oscilador armónico cuántico}
 
     \subsection{Pozo de potencial finito}
-
+    \subsection{Características principales}
+Un pozo de potencial finito es una de las estrcuturas básicas utilizadas
+en física cuántica para observar el comportamiento de la función
+de onda de una partícula. Este pozo viene descrito por el siguiente 
+potencial:
+\begin{equation}
+V(x)=\begin{cases} 
+    0 & \text{si} \quad -\infty < x \leq -a \\
+    -V_0 & \text{si} \quad -a\leq x \leq a \\
+    0 & \text{si} \quad a \leq x < \infty \\
+ \end{cases}
+\end{equation}
+Siendo $V_0$ positivo.
+Si resolvemos la ecaución de autovalores del Hamiltoniano vamos
+a obtener diferentes soluciones en función del tramo en el que 
+nos encontremos y dependiendo de si la función es par o impar. Por simplicidad,
+vamos a clasificarlas en función de si la solución es par o impar: \\
+\par
+Si la solución es par obtenemos:
+\begin{equation}
+    \psi^{(+)}(x)=\begin{cases} 
+        C e^{\beta x} & \text{si} \quad -\infty < x \leq -a \\
+        A\cos(\alpha x) & \text{si} \quad -a\leq x \leq a \\
+        C e^{-\beta x} & \text{si} \quad a \leq x < \infty \\
+     \end{cases}
+\end{equation}
+Por otra parte, si la solución es impar tendremos:
+\begin{equation}
+    \psi^{(-)}(x)=\begin{cases} 
+        -C e^{\beta x} & \text{si} \quad -\infty < x \leq -a \\
+        B\sin(\alpha x) & \text{si} \quad -a\leq x \leq a \\
+        C e^{-\beta x} & \text{si} \quad a \leq x < \infty \\
+     \end{cases}
+\end{equation}
+Donde A,B y C son las constantes de normalización y $\alpha$ y $\beta$ vienen definidos como: 
+$\alpha=\frac{\sqrt{2m(\left\lvert V_0 \right\rvert-\left\lvert E \right\rvert)}}{\hbar}$
+; $\beta=\frac{\sqrt{2m\left\lvert E \right\rvert}}{\hbar}$ \\
+\par
+Como vemos, las constantes de normalización dependen de los 
+valores de la energía y de $V_0$. Es decir, variarán según cómo
+se haya construido el pozo. En la siguiente sección hablaremos sobre
+el pozo que vamos a analizar y el valor de las constantes de normalización.
+\begin{figure}[h]
+    \centering
+    \includegraphics{images.png}
+    \caption{Pozo de potencial finito}
+    \label{fig:etiqueta}
+\end{figure}
+\subsection{Construcción del pozo de potencial}
+Para este pozo se ha usado el valor para la profundida del pozo
+de: $V_0=50$(unidades arbitrarias). Además, como en el ordenador
+no podemos incluir el infitio como en la definición formal, hemos 
+decidido usar como aproximación en los extremos de análisis $\pm 15$.
+Por último, hemos decidido situar el pozo en la región de -5 a 5. \\
+\par
+Teniendo todo esto en cuenta, hemos obtenido las siguientes constantes
+de normalización: $A=B=0,44$ y $C=$. Para ello, hemos usado la definición
+de normalización:
+\begin{equation}
+\int_{a}^{b} \psi^{*}(x) \psi(x) \,dx=1
+\end{equation}
+Un apunte importante es que para todos los cálculos se ha considerado
+que $\hbar=m=1$. \\
+\par
+A continuación, en las siguiente sección mostraremos las soluciones numéricas 
+y las compararemos con las obtenidas analíticamente.
+\subsection{Soluciones numéricas}
+\subsubsection{Normalización mediante método Simpson}
+Las soluciones numéricas han sido obtenidas para un número 
+N=1000 puntos y un total de 5 funciones. Las soluciones numéricas
+para esas funciones son: 
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.5]{numericas.jpg}
+\end{figure} \\
+\par
+Mientras que las soluciones analíticas son las siguientes:
+\newpage
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.5]{analiticas.jpg}
+\end{figure} 
+\subsubsection{Normalización mediante método de los trapecios}
+De nuevo, se han usado un total de 1000 puntos y un total de 5 
+funciones. Mediante este método de normalización se han obtenido
+las siguientes soluciones numéricas:
+\newpage
+\begin{figure}[h]
+\centering
+\includegraphics[scale=0.5]{trap.jpg}
+\end{figure} 
 \section{Estudio de errores para las soluciones obtenidas}
 
     \subsection{Pozo de potencial infinito}
