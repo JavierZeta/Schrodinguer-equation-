@@ -28,12 +28,14 @@ N = input('Introduce el número de puntos: ');
 
 numerovec = input('Introduce el número de autofunciones deseadas: ');
 
+m=input('Presione 1 para usar el método Simpson y 2 para los trapecios: ');
+
 if flag == 1
     main_pozoinfinito(a,b,N,numerovec)
 end
 
 if flag == 2
-    main_pozofinito(a,b,N,numerovec)
+    main_pozofinito(a,b,N,numerovec,m)
 end
 
 if flag == 3
@@ -45,7 +47,9 @@ if flag2 == 4
 end
 
 if flag2 == 5
-   %errores energia pozo finito y errores funciones pozo finito
+    minN = input('Ingresa el mínimo número de puntos: ');
+    maxN = input('Ingresa el máximo número de puntos: ');
+    mainerrores_finito(a,b,numerovec,minN,maxN,N)
 end
 
 if flag2 == 6
