@@ -1,4 +1,5 @@
 \documentclass[12pt]{article}
+\usepackage{subcaption}
 \usepackage[spanish]{babel}
 \usepackage{pgfplots}
 \usepackage[utf8]{inputenc}
@@ -10,6 +11,7 @@
 \providecommand{\norm}[1]{\lVert#1\rVert}
 \usepackage[a4paper, left=3cm, right=3cm, top=35mm, bottom=20mm]{geometry}
 \usepackage{blindtext}
+\usepackage{graphicx}
 
 \begin{document}
 
@@ -556,7 +558,7 @@ weonito weonito
 
 \subsection{Regla de Simpson}
 
-Al igual que los anteriores métodos, la \textbf{Regla de Simpson} es un mecanismo de integración numérica basado en funciones de interpolación (polinomios generalmente) utilizado para aproximar el valor de diversas funciones de interés. Esta regla es el resultado de combinar la regla del punto medio y la regla de los trapecios en una sola que reduzca los errores locales de la aproximación.\\
+Al igual que el anterior método, la \textbf{Regla de Simpson} es un mecanismo de integración numérica basado en funciones de interpolación (polinomios generalmente) utilizado para aproximar el valor de diversas funciones de interés. Esta regla es el resultado de combinar la regla del punto medio y la regla de los trapecios en una sola que reduzca los errores locales de la aproximación.\\
 
 La regla de Simpson aproxima el área calculada por la integral en el intervalo $[x_{j-1} , x_{j+1}]$ mediante una parábola que pasa por tres puntos. En concreto:
 
@@ -570,84 +572,14 @@ Al tratarse de una parábola, usamos como función con integral conocida (funci�
 \includegraphics[scale=0.26]{intro}
 \end{center}
 
-Esta regla también tiene dos desarrollos en función de la precisión que queramos obtener y en función del número de pasos a ejecutar. Son la Regla de Simpson \textbf{simple} y la \textbf{compuesta}.
+Esta regla tiene dos desarrollos en función de la precisión que queramos obtener y en función del número de pasos a ejecutar. Son la Regla de Simpson \textbf{simple} y la \textbf{compuesta}. Como el mayor interés de este trabajo es ver el método aplicado como parte de la resolución numérica, vamos directamente a hablar de la compuesta que es la que se utiliza a efectos prácticos.
 
-\subsubsection{Regla de Simpson simple}
+\subsubsection{Regla de Simpson compuesta}
 
-Como explicamos, al aproximar la función por medio de parábolas, usamos el polinomio de interpolación de Lagrange de orden 2 denotado $P_2(x)$.
-
-\begin{center}
-$P_2(x)=Ax^2+Bx+C$
-\end{center}
-
-Este polinomio nos es de utilidad ya que conocemos el valor de su integral. Así pues, vamos a realizar la siguiente aproximación:
-
-\begin{equation}\label{eq:rss}
-\int \limits_{-h}^{h} f(x) \cdot dx \approx 
-\int \limits_{-h}^{h} P_2(x) \cdot dx =
-\frac{h}{3}(y_0+4y_1+y_2)
-\end{equation}
-
-Donde los valores $y_0, y_1, y_2$ corresponden, respectivamente a $f(-h), f(0), f(h)$, que son los puntos por los que hemos hecho pasar la parábola.\\
-
-Podemos ver la aproximación que estamos realizando en el siguiente gráfico:
+Esta regla no es más que la extensión de la regla simple para una región que no necesariamente sea el origen. Si queremos aplicarlo a una función que se extiende por el plano, el primer paso es dividir la parte del dominio de la función que queramos aproximar en un número par \textbf{n} de intervalos. Es decir, hay que dividir el intervalo $[a,b]$ en n subintervalos donde n es un número par. Esto es:
 
 \begin{center}
-\includegraphics[scale=0.55]{simple}
-\end{center}
-
-\underline{\textbf{Demostración de la regla de Simpson simple}} \\
-
-Empezamos viendo el área que encierra la parábola descrita por $P_2(x)$:
-
-\begin{equation}\label{eq:simsim}
-\int \limits_{-h}^{h} P_2(x) \cdot dx = 
-\int \limits_{-h}^{h} Ax^2+Bx+C \cdot dx =
-\frac{2Ah^3}{3}+2Ch = \frac{h}{3}(2Ah^2+6C)
-\end{equation}
-
-Como la parábola pasa por los puntos:
-
-\begin{center}
-$(-h,y_0)=(-h,f(-h)) \hspace{2mm},\hspace{2mm}
-(0,y_1)=(0,f(0)) \hspace{2mm},\hspace{2mm}
-(h,y_2)=(h,f(h))$
-\end{center}
-
-Entonces:
-
-\begin{equation*}
-\left\lbrace
-\begin{array}{ll}
-\textup y_0 = P_2(-h) = Ah^2-Bh+C\\
-\textup y_1 = P_2(0) = C\\
-\textup y_2 = P_2(h) = Ah^2+Bh+C\\
-\end{array}
-\Rightarrow\right.
-\end{equation*}
-
-Obteniendo así un sistema de ecuaciones que podemos resolver para A, B y C en función de $y_0$, $y_1$ e $y_2$:
-
-\begin{equation}
-\Rightarrow
-\left\lbrace
-\begin{array}{ll}
-\textup C = y_1\\
-\textup Ah^2-Bh = y_0 - y_1\\
-\textup Ah^2+Bh = y_2 - y_1\\
-\textup 2Ah^2 = y_0 + y_2 - 2y_1\\
-\end{array}
-\right.
-\end{equation}
-
-Con estos resultados, podemos sustituir A y C en la ecuación~\ref{eq:simsim}.
-
-\subsubsection{Generalización de la regla de Simpson simple}
-
-Si queremos generalizar la regla para otra región que no necesariamente sea el origen, y si queremos aplicarlo a una función que se extiende por el plano, el primer paso es dividir la parte del dominio de la función que queramos aproximar en un número par \textbf{n} de intervalos. Es decir, hay que dividir el intervalo $[a,b]$ en n subintervalos donde n es un número par. Esto es:
-
-\begin{center}
-\includegraphics[scale=0.5]{simple_n}
+\includegraphics[width=0.6\linewidth]{simple_n}
 \end{center}
 
 Así, podemos escribir lo siguiente:
@@ -657,7 +589,7 @@ Así, podemos escribir lo siguiente:
 -La anchura del intervalo, que denominamos paso, es $\Delta x=\frac{b-a}{n}$ .
 \end{flushleft}
 
-Con estas aclaraciones y la nueva notación, podemos reescribir la expresión~\ref{eq:rss} de la siguiente forma:
+Con estas aclaraciones y la nueva notación, podemos escribir la expresión:
 
 \begin{equation}
 \int \limits_{x_{k-1}}^{x_{k+1}} f(x) \cdot dx \approx 
@@ -665,22 +597,20 @@ A(P_k) =
 \frac{\Delta x}{3}(f(x_{k-1})+4f(x_k)+f(x_{k+1}))
 \end{equation}
 
-Por último, debemos observar que como n es par, es decir, $n=2r$, ¡en nuestra aproximación vamos a tener r parábolas!\\
+Ahora, debemos observar que como n es par, es decir, $n=2r$, ¡en nuestra aproximación vamos a tener r parábolas!\\
 
 \begin{center}
-\includegraphics[scale=0.45]{rpara}
+\includegraphics[width=0.6\linewidth]{fotos/rpara.jpeg}
 \end{center}
 
 En el ejemplo vemos como tenemos 6 intervalos y sin embargo 3 parábolas. \begin{center}($6=2r$)\end{center}
-
-\subsubsection{Regla de Simpson compuesta}
 
 Con estas últimas consideraciones llegamos a la versión compuesta de este método. Básicamente consiste en aplicar la forma general de la versión simple de la regla sucesivas veces hasta cubrir la región finita que queramos aproximar.\\
 
 Esto es lo que acabamos de ver, si dividimos el intervalo finito $[a,b]$ de la función que queremos aproximar en un número par \textbf{n=2r} de subintervalos de longitud $\Delta x=\frac{b-a}{n}$, llegamos a la siguiente expresión:
 \begin{equation*}
 \int \limits_{a}^{b} f(x) \cdot dx \approx 
-\int \sum_{k=1}^{r}A(P_k) =
+ \sum_{k=1}^{r}A(P_k) =
 \frac{\Delta x}{3}\sum_{k=1}^{r}[f(x_{2k-2})+4f(x_{2k-1})+f(x_{2k})] =
 \end{equation*}
 \begin{equation*}
@@ -692,12 +622,9 @@ Esto es lo que acabamos de ver, si dividimos el intervalo finito $[a,b]$ de la f
 =\frac{\Delta x}{3}[f(a)+4\sum_{k=1}^{r}f(x_{2k-1})+2\sum_{k=1}^{r-1}f(x_{2k})+f(b)]
 \end{equation}
 
-Donde en el penúltimo paso se ha separado $f(x_0)$ ya que para el caso $k=1$, $f(x_{2k-2}=f(x_0)$ al igual que $f(x_n)$ ya que para el caso $k=r$, $f(x_{2k}=f(x_{2r})=f(x_n)$. Además, el último sumatorio está multiplicado por 2 ya que tanto el primer término como el último proporcionan lo mismo para algún valor de k, a excepción de los extremos (pero al sacarlos, nos deshacemos el problema).
-
 \subsubsection{Error de aproximación en la regla de Simpson}
 
-Al igual que en la regla del punto medio, podemos establecer una cota superior para el error cometido al aproximar la integral de una función según el método de Simpson. Para ello, definamos primero el error global en la etapa n.
-
+En este método también podemos establecer una cota superior para el error cometido al aproximar la integral deseada. Para ello, definamos primero el error global en la etapa n.
 
 \begin{equation}
 E_n=\left |\displaystyle \int \limits_{a}^{b} f(x) \cdot dx - Sn\right |
@@ -710,7 +637,6 @@ S_n = S_{2r} = \frac{\Delta x}{3}
 \end{equation}
 
 Y sea $K_4 = \smash{\displaystyle\max_{x \in [a,b]}} |f^{(4)}(x)|$. Entonces el error absoluto está acotado por:
-
 
 \begin{equation}
 E_n \leq \frac{K_4(b-a)^5}{180n^4} = \frac{K_4(b-a)}{180}(\Delta x)^4 \sim O((\Delta x)^4)
@@ -790,50 +716,67 @@ Una vez planteado el escenario, veamos las funciones de onda que describen a las
 
     Para normalizar nuestras funciones usaremos tanto el método de los trapecios como el método de Simpson. Con estas funciones ya podremos comparar nuestras soluciones numéricas (aproximadas) con las soluciones analíticas que hemos descrito. La diferencia entre ambas se corresponderá con el error en la aproximación y en la siguiente sección trataremos este tema con detalle.\\
     
-    Primero visualicemos lo que hemos explicado para cada solución estudiada en este trabajo. Empecemos por el pozo de potencial infinito:
+    Primero visualicemos lo que hemos explicado para cada solución estudiada en este trabajo. Empecemos por el pozo de potencial infinito, donde antes que nada vamos a dejar por escrito las condiciones que utilizamos para realizar las siguientes representaciones:\\
 
+     El potencial V(x)=0 existe en la región del espacio delimitada por los límites a=0 y b=5. Ese es nuestro intervalo de trabajo. Para hacer la aproximación cogemos un N=1000 puntos y vamos a representar 5 funciones de onda. Los resultados han sido los siguientes:\\
 
+     \textit{Nota: Para mejorar la visualización del gráfico, a cada función de onda se le ha sumado dos veces su nivel de energía para que las ondas aparecieran separadas sin superponerse.}
 
+     \begin{figure}[H]
+         \centering
+         \includegraphics[width=1.05\linewidth]{fotos/infinito_analiticas.jpg}
+         \caption{Funciones analíticas según el nivel de energía. En el eje horizontal representamos la región del espacio y en el vertical la función de onda más dos veces su nivel de energía (2$\cdot$n con n=1,2,3,4,5).}
+     \end{figure}
 
+     \begin{figure}[H]
+         \centering
+         \includegraphics[width=1.05\linewidth]{fotos/infinito_numericas.jpg}
+         \caption{Funciones aproximadas por métodos numéricos según el nivel de energía. En el eje horizontal representamos la región del espacio y en el vertical la función de onda más dos veces su nivel de energía (2$\cdot$n con n=1,2,3,4,5).}
+     \end{figure}
 
+En este punto y en los que siguen hay una pequeña aclaración que hay que comentar. Como hemos explicado, nosotros procedemos primero discretizando el espacio con diferencias finitas y después diagonalizando la matriz del Hamiltoniano. De esta última sacamos los autovalores y las autofunciones con la función \textit{eig()} de MATLAB. Si recordamos algo de álgebra lineal, para un mismo autovalor, hay dos vectores propios asociados, la autofunción y su inversa (la misma autofunción pero multiplicada por -1).\\
 
+Esto no nos influye a la hora de calcular los errores de aproximación, pero sí se observa en las gráficas, por lo que hay que tenerlo en cuenta. Para ejemplificar lo que estamos explicando mostremos dos niveles de energía de las autofunciones del pozo infinito en la siguiente figura:
+        
+\begin{figure}[H]
+\centering
+\begin{subfigure}{1\textwidth}
+    \includegraphics[width=1\textwidth]{fotos/n2_infinit_vs.jpg}
+\end{subfigure}
+\hfill
+\begin{subfigure}{1\textwidth}
+    \includegraphics[width=1\textwidth]{fotos/n3_infinito_vs.jpg}
+\end{subfigure}
+\caption{Encima una autofunción que resulta invertida respecto a la solución analítica. Debajo de la anterior, ambas funciones, numérica y analítica coinciden en signo.}
+\end{figure}
 
+Tras mostrar las funciones de onda, hacemos lo propio para los niveles de energía obtenidos numérica y analíticamente.
 
+     \begin{figure}[H]
+         \centering
+         \includegraphics[width=1.05\linewidth]{fotos/energia_infin_analitica.jpg}
+         \caption{Niveles de energía analíticos representados a modo de esquema en la misma región que el pozo. Los niveles corresponden a n=1,2,3,4 y 5.}
+     \end{figure}
 
+     \begin{figure}[H]
+         \centering
+         \includegraphics[width=1.05\linewidth]{fotos/energia_infin_numerica.jpg}
+         \caption{Niveles de energía obtenidos por métodos numéricos representados a modo de esquema en la misma región que el pozo. Los niveles corresponden a n=1,2,3,4 y 5.}
+     \end{figure}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+Con esto tenemos a disposición los resultados necesarios para ver que los procedimientos han sido correctos y que la aproximación, en primera instancia, es bastante aceptable dentro de los parámetros de la simulación. Queda pendiente el análisis de los errores que se realizará en la sección~\ref{sec:errores} de este trabajo.
 
     \subsection{Oscilador armónico cuántico}
 
     \subsection{Pozo de potencial finito}
-    \subsection{Características principales}
-Un pozo de potencial finito es una de las estrcuturas básicas utilizadas
+    \subsubsection{Soluciones analíticas}
+    \textbf{\underline{Características principales}}\\
+    
+Un pozo de potencial finito es una de las estructuras básicas utilizadas
 en física cuántica para observar el comportamiento de la función
 de onda de una partícula. Este pozo viene descrito por el siguiente 
 potencial:
+
 \begin{equation}
 V(x)=\begin{cases} 
     0 & \text{si} \quad -\infty < x \leq -a \\
@@ -841,45 +784,51 @@ V(x)=\begin{cases}
     0 & \text{si} \quad a \leq x < \infty \\
  \end{cases}
 \end{equation}
-Siendo $V_0$ positivo.
-Si resolvemos la ecaución de autovalores del Hamiltoniano vamos
+
+Siendo $V_0$ positivo.\\
+
+Si resolvemos la ecuación de autovalores del Hamiltoniano vamos
 a obtener diferentes soluciones en función del tramo en el que 
 nos encontremos y dependiendo de si la función es par o impar. Por simplicidad,
 vamos a clasificarlas en función de si la solución es par o impar: \\
-\par
+
 Si la solución es par obtenemos:
+
 \begin{equation}
-    \psi^{(+)}(x)=\begin{cases} 
+    \boxed{\psi^{(+)}(x)=\begin{cases} 
         C e^{\beta x} & \text{si} \quad -\infty < x \leq -a \\
         A\cos(\alpha x) & \text{si} \quad -a\leq x \leq a \\
         C e^{-\beta x} & \text{si} \quad a \leq x < \infty \\
-     \end{cases}
+     \end{cases}}
 \end{equation}
+
 Por otra parte, si la solución es impar tendremos:
+
 \begin{equation}
-    \psi^{(-)}(x)=\begin{cases} 
+    \boxed{\psi^{(-)}(x)=\begin{cases} 
         -C e^{\beta x} & \text{si} \quad -\infty < x \leq -a \\
         B\sin(\alpha x) & \text{si} \quad -a\leq x \leq a \\
         C e^{-\beta x} & \text{si} \quad a \leq x < \infty \\
-     \end{cases}
+     \end{cases}}
 \end{equation}
-Donde A,B y C son las constantes de normalización y $\alpha$ y $\beta$ vienen definidos como: 
-$\alpha=\frac{\sqrt{2m(\left\lvert V_0 \right\rvert-\left\lvert E \right\rvert)}}{\hbar}$
-; $\beta=\frac{\sqrt{2m\left\lvert E \right\rvert}}{\hbar}$ \\
-\par
-Como vemos, las constantes de normalización dependen de los 
-valores de la energía y de $V_0$. Es decir, variarán según cómo
-se haya construido el pozo. En la siguiente sección hablaremos sobre
-el pozo que vamos a analizar y el valor de las constantes de normalización.
-\begin{figure}[h]
+
+Donde A, B y C son las constantes de normalización y $\alpha$ y $\beta$ vienen definidos como: 
+
+\begin{center}
+    $\alpha=\frac{\sqrt{2m(\left\lvert V_0 \right\rvert-\left\lvert E \right\rvert)}}{\hbar}$
+\hspace{0.3cm};\hspace{0.3cm} $\beta=\frac{\sqrt{2m\left\lvert E \right\rvert}}{\hbar}$ 
+\end{center}
+
+Como vemos, las constantes de normalización dependen de los  valores de la energía y de $V_0$. Es decir, variarán según cómo se haya construido el pozo. En la siguiente sección hablaremos sobre el pozo que vamos a analizar y el valor de las constantes de normalización.
+\begin{figure}[H]
     \centering
     \includegraphics{images.png}
     \caption{Pozo de potencial finito}
     \label{fig:etiqueta}
 \end{figure}
-\subsection{Construcción del pozo de potencial}
+\subsubsection{Construcción del pozo de potencial}
 Para este pozo se ha usado el valor para la profundida del pozo
-de: $V_0=50$(unidades arbitrarias). Además, como en el ordenador
+de: $V_0=50$ (unidades arbitrarias). Además, como en el ordenador
 no podemos incluir el infitio como en la definición formal, hemos 
 decidido usar como aproximación en los extremos de análisis $\pm 15$.
 Por último, hemos decidido situar el pozo en la región de -5 a 5. \\
@@ -891,38 +840,50 @@ de normalización:
 \int_{a}^{b} \psi^{*}(x) \psi(x) \,dx=1
 \end{equation}
 Un apunte importante es que para todos los cálculos se ha considerado
-que $\hbar=m=1$. \\
-\par
-A continuación, en las siguiente sección mostraremos las soluciones numéricas 
+que $\hbar~=~m~=~1$. \\
+
+A continuación, en la siguiente sección mostraremos las soluciones numéricas 
 y las compararemos con las obtenidas analíticamente.
-\subsection{Soluciones numéricas}
-\subsubsection{Normalización mediante método Simpson}
+
+\subsubsection{Soluciones numéricas}
+
+\textbf{\underline{Normalización mediante método Simpson}}\\
+
 Las soluciones numéricas han sido obtenidas para un número 
 N=1000 puntos y un total de 5 funciones. Las soluciones numéricas
 para esas funciones son: 
-\begin{figure}[h]
+
+\begin{figure}[H]
     \centering
     \includegraphics[scale=0.5]{numericas.jpg}
-\end{figure} \\
-\par
+\end{figure}
+
 Mientras que las soluciones analíticas son las siguientes:
-\newpage
-\begin{figure}[h]
+
+\begin{figure}[H]
     \centering
     \includegraphics[scale=0.5]{analiticas.jpg}
 \end{figure} 
-\subsubsection{Normalización mediante método de los trapecios}
+
+\textbf{\underline{Normalización mediante método de los trapecios}}\\
+
 De nuevo, se han usado un total de 1000 puntos y un total de 5 
 funciones. Mediante este método de normalización se han obtenido
 las siguientes soluciones numéricas:
 \newpage
-\begin{figure}[h]
+\begin{figure}[H]
 \centering
 \includegraphics[scale=0.5]{trap.jpg}
 \end{figure} 
-\section{Estudio de errores para las soluciones obtenidas}
+\section{Estudio de errores para las soluciones obtenidas} \label{sec:errores}
+
+En esta sección vamos a centrarnos en estudiar los errores que cometemos a la hora de aproximar las soluciones, es decir, trataremos de ilustrar el error que tienen asociado los métodos numéricos que hemos empleado para obtener los resultados que hemos mostrado en el trabajo.\\
+
+Los parámetros de la simulación se indicarán en cada apartado pero el procedimiento será general para sendos. 
 
     \subsection{Pozo de potencial infinito}
+
+    
     
     \subsection{Oscilador armónico cuántico}
 
@@ -931,5 +892,22 @@ las siguientes soluciones numéricas:
     \subsection{Métodos de integración}
     
 \section{Consideraciones: Ecuación dependiente del tiempo}
+
+\newpage
+\section{Anexo}
+\subsection{Códigos de MATLAB}
+Adjunto con este trabajo, se envía el fichero de archivos que se ha utilizado para realizar todas las simulaciones descritas aquí, tanto las pertinentes a graficar las soluciones como las que se encargan de realizar el análisis de errores.\\
+
+Con el objetivo de que el código sea reutilizable y capaz de estudiar las soluciones de la Ecuación de Schrödinger independiente del tiempo, se ha realizado a modo de interfaz un script en concreto que ha de ejecutarse en pos de observar lo que el usuario desee.\\
+
+Este script inicial es \textit{THE\_MAIN.tex}, el cual a la hora de ejecutarse le pedirá al usuario lo que desea visualizar, haciéndole elegir entre realizar un estudio de:
+
+\begin{itemize}
+    \item Soluciones: El usuario entonces deberá ingresar los límites del dominio, el número de puntos con los que dividir el espacio y el número de autofunciones que debe mostrar.
+
+    \item Errores: A lo anterior hay que añadirle el número mínimo de puntos y el máximo para ver como evoluciona el error según el paso de discretización (a menos puntos, mayor el paso). Como se enseñará el error en las energías y el error en las funciones, para este segundo el programa también pedirá si la normalización se hará mediante el método de los trapecios o mediante el método de Simpson.
+
+\end{itemize}
+
 
 \end{document}
