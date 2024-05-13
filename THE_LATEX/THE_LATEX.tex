@@ -550,10 +550,12 @@ Con lo cual, conviene describir qué es un método de integración basado en fun
 Esta familia de métodos se basa en aproximar la función dada $f(x)$ por otra función $g(x)$ la cual conocemos el valor de su integral. Para  construir esta función, se la hace pasar por un cierto número de puntos en los que f y g tienen el mismo valor. Usualmente intentamos que $g(x)$ sea un polinomio para simplificar el cálculo de su primitiva.
 \subsection{Regla de los trapecios}
 
-El método de los trapecios es otra forma más de aproximar la integral de manera numérica, este en su forma más básica, conecta los extremos $(a,f(a))$ y $(b,f(b))$ por una línea recta y aproxima el área por el área de un trapecio,.
-Este método es conceptualmente sencillo y existen tablas datadas de antes del 50 A.C. que muestran como los babilonios utilizaban este método para calcular la eclíptica de Júpiter.\cite{babilonios}%%https://www.science.org/doi/full/10.1126/science.aad8085
+El método de los trapecios es una forma de aproximar la integral de manera numérica. Este, en su forma más básica, conecta los extremos $(a,f(a))$ y $(b,f(b))$ por una línea recta y aproxima el área por el área de un trapecio.
+Este método es conceptualmente sencillo y existen tablas datadas de antes del 50 A.C. que muestran como los babilonios utilizaban este método para calcular la eclíptica de Júpiter.
+\cite{babilonios}%%https://www.science.org/doi/full/10.1126/science.aad8085
 
 \begin{tikzpicture}
+\centering
     \begin{axis}[
         axis lines = left,
         xlabel = $x$,
@@ -589,24 +591,22 @@ Este método es conceptualmente sencillo y existen tablas datadas de antes del 5
     } \closedcycle;
     
     \addlegendentry{Área del trapecio}
-    
     \end{axis}
-    \end{tikzpicture}
+    \end{tikzpicture}\\
+    
     El área de un trapecio será el área del rectángulo más el área del triangulo de encima:
     
 \begin{equation}\label{eq2}
 A_{\text {trapecio}} = \underbrace{(b-a)f(a)}_{\text{área triangulo}} + \underbrace{\frac{(a-b)(f(b)-f(a))}{2}}_{\text{área trapecio}} = (a-b)\frac{f(a)+f(b)}{2}
 \end{equation}
+
 \begin{equation}\label{eq2}
 A_{\text {función}} \thickapprox (b-a)\frac{f(a) + f(b)}{2}
 \end{equation}
 
 
-Esto según se ve en la figura 2a puede parecer algo poco preciso, es por esto que aumentando el número de trapecios obtenemos una mayor precisión usando así la regla de los trapecios compuesta.
+Esto según se ve en la figura anterior puede parecer algo poco preciso, es por esto que aumentando el número de trapecios, obtenemos una mayor precisión. Llegamos así a la regla de los trapecios compuesta, la cual se usa de la siguiente manera:
 
-
-
-La regla de los Trapecios compuesta se usa de la siguiente manera:
     \begin{align*}
         &\text{Dividimos } [a,b] \text{ en } n \text{ subintervalos definidos por } n + 1 \text{ puntos} \\
         &a =x_0 < x_1 < \cdots < x_{n-1} < x_n = b , \quad \Delta x_j =x_j - x_{j-1} \\
@@ -688,21 +688,9 @@ La regla de los Trapecios compuesta se usa de la siguiente manera:
                 \end{axis}
                 \end{tikzpicture}
                 Como podemos observar de esta manera nuestra aproximación del área es mucho más precisa solamente dividiendo en 3 intervalos.
-        De hecho, el error absoluto cometido en la aproximación por los trapecios está acotado por:
-$$
-E_n = \left| \int_{a}^{b} f(x)dx  - T_n\right| \leq \frac{K_2(b-a)^3}{12n^2}= \frac{K_2(b-a)}{12}(\Delta x)^2 \sim O(\Delta x^2)
-$$
-
-
-
-
-
-
-donde:
-$$
-K_2 = \max_{x \in [a, b]} |f''(x)|
-$$
+       
 \begin{proof}
+
 Si dividimos $[a,b]$ en $n$ subintervalos definidos por los $n + 1$ puntos:
 $a =x_0 <x_1 <\cdots < x_{n-1} < x_n = b$ , $\Delta x = \frac{b-a}{n}$, tenemos:
 \[
@@ -719,7 +707,24 @@ Como $\Delta x = \frac{b-a}{n}$, entonces:
 \[
 \int_{a}^{b} f (x)dx = T_n - \frac{f''(\xi)(b -a)^3}{12n^2}
 \]
-Finalmente, el error absoluto cometido está acotado por:
+\end{proof}
+
+
+\subsubsection{Error de aproximación en la regla de trapecios}
+
+Este método conlleva un error absoluto que podemos acotar gracias a la siguiente expresión:
+
+$$
+E_n = \left| \int_{a}^{b} f(x)dx  - T_n\right| \leq \frac{K_2(b-a)^3}{12n^2}= \frac{K_2(b-a)}{12}(\Delta x)^2 \sim O(\Delta x^2)
+$$
+donde:
+$$
+K_2 = \max_{x \in [a, b]} |f''(x)|
+$$
+
+La correspondiente demostración se obtiene simultáneamente con la propia del método:
+
+\begin{proof}
 \[
 E = \left|\int_{a}^{b} f (x)dx -T_n\right| = \left|\frac{f''(\xi)(b -a)^3}{12n^2}\right| = \frac{(b-a)^3}{12n^2} |f''(\xi)| \leq \frac{K_2(b -a)^3}{12n^2} = \frac{K_2(b-a)}{12} (\Delta x)^2
 \]
@@ -729,10 +734,6 @@ K_2 = \max_{x\in[a,b]} |f''(x)|
 \]
 \end{proof}
 
-
-\subsubsection{Error de aproximación en la regla de trapecios}
-
-weonito weonito
 
 \subsection{Regla de Simpson}
 
@@ -942,113 +943,145 @@ Tras mostrar las funciones de onda, hacemos lo propio para los niveles de energ�
          \caption{Niveles de energía obtenidos por métodos numéricos representados a modo de esquema en la misma región que el pozo. Los niveles corresponden a n=1,2,3,4 y 5.}
      \end{figure}
 
+Los valores obtenidos tanto analítica como numéricamente se recogen en la siguiente tabla:
+
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c||c||c|}
+    \hline
+        $E_n$ & Valor analítico & Valor numérico \\ \hline \hline
+        $E_1$ & 0.197392088021787 & 0.197391925353448 \\ \hline
+        $E_2$ & 0.789568352087149 & 0.789565749317132 \\ \hline
+        $E_3$ & 1.776528792196085 & 1.776515615673212 \\ \hline
+        $E_4$ & 3.158273408348594 & 3.158231764114112 \\ \hline
+        $E_5$ & 4.934802200544679 & 4.934700530344333 \\ \hline
+    \end{tabular}
+    \caption{Datos obtenidos de la simulación para las energías de cada función de onda. Estos datos representan los autovalores correspondientes a cada autofunción}
+\end{table}
+
 Con esto tenemos a disposición los resultados necesarios para ver que los procedimientos han sido correctos y que la aproximación, en primera instancia, es bastante aceptable dentro de los parámetros de la simulación. Queda pendiente el análisis de los errores que se realizará en la sección~\ref{sec:errores} de este trabajo.
 
     \subsection{Oscilador armónico cuántico}
 
     El oscilador armónico tiene una gran importancia en la física 
-    y se utiliza en una amplia gama de campos debido a su capacidad para modelar una variedad de fenómenos naturales.
-    Clásicamente, un cosilador armonioso se describe por la posición $x(t)$ de una partícula de masa m y su momento $p(t)$. 
+    y se utiliza en una amplia gama de campos debido a su capacidad para modelar una variedad de fenómenos naturales.\\
+    
+    Clásicamente, un oscilador armonioso se describe por la posición $x(t)$ de una partícula de masa m y su momento $p(t)$. 
     La energía $E$ de una partícula con posición y momento viene dada por $E = \frac{p^2}{2m} + \frac{1}{2}m\omega^2x^2$.
-    Donde $\omega$ es la frecuencia angular del sistema y viene dada por $\omega=\frac{2\pi}{T}$ donde $T$ aquí es el periodo de oscilación del sistema
-    Para este caso también se cumple que $\omega=\sqrt{\frac{k}{m}}$ ya que la partícula de masa $m$ siente una fuerza de atracción dada por $F=-kx$, siendo $k$ la constante elástica.\\ \\ 
+    Donde $\omega$ es la frecuencia angular del sistema y viene dada por $\omega=\frac{2\pi}{T}$ y $T$ es el periodo de oscilación del sistema
+    Para este caso también se cumple que $\omega=\sqrt{\frac{k}{m}}$ ya que la partícula de masa $m$ siente una fuerza de atracción dada por $F=-kx$, siendo $k$ la constante elástica.\\
+    
     El problema con este oscilador clásico es que no podemos usarlo para describir sistemas donde los efectos cuánticos sean considerables,
-    para solucionar esto convertimos nuestro momento y posición en los operadores hermíticos $\hat{x}$ y $\hat{p}$, con estos nos construimos nuestro Hamiltoniano que inspirado en la energía clasica nos queda:
+    para solucionar esto convertimos nuestro momento y posición en los operadores hermíticos $\hat{x}$ y $\hat{p}$. Con estos nos construimos nuestro Hamiltoniano que inspirado en la energía clásica queda:
+    
     \begin{equation}
     H\equiv \frac{\hat{p}^2}{2m} + \frac{1}{2}m\omega^2\hat{x}^2
     \end{equation}
     
-    Por lo tanto la ecuación de Schrodinger independiente del termino para este Hamiltoniano queda:
+    Por lo tanto la ecuación de Schrödinger independiente del término para este Hamiltoniano queda:
+    
     \begin{equation}
         \frac{-\hbar^2}{2m}\frac{\partial^2\psi(x)}{\partial x^2} + \frac{1}{2}m\omega^2x^2\psi(x)=E\psi(x)
     \end{equation}
     
     Esta ecuación tiene como solución analítica las funciones de onda ya normalizadas:
+    
     \begin{equation}
         \psi _n\left(x\right)=\frac{1}{\sqrt[2]{2^n\cdot \:n!}\cdot \pi ^{\frac{1}{4}}}\cdot \:H_n\left(x\right)e^{-\frac{x^2}{2}}
     \end{equation}
-    Siendo los $H_n$ los polinomios de Hermite, estos son polinomios ortogonales con la siguiente forma:
+    
+    Siendo los $H_n$ los correspondientes polinomios de Hermite, que son polinomios ortogonales con la siguiente forma:
+    
     \begin{figure}[H]
         \centering
-        \includegraphics[width=4in]{fotos/PolinomiosHermite.png}
-        \caption{4 primeros polinomios de Hermite}
+        \includegraphics[width=0.8\textwidth]{fotos/PolinomiosHermite.png}
+        \caption{Cuatro primeros polinomios de Hermite.}
         \label{PolinomiosHermite}
     \end{figure}
+    
     Con energías asociadas de la forma:
+    
     \begin{equation}
         E_n=\left(n+\frac{1}{2}\right)\hbar \omega 
     \end{equation}
-    Para nuestras soluciones numéricas usaremos la frecuencia del oscilador $\omega=1$ la constante de planck $\hbar=1$ y la masa $m=1$ con el objetivo de facilitar los calculos.\\
-    Definimos nuestro potencial como $V=\frac{1}{2}m\omega^2x^2$ y trabajaremos en el intervalo [-8,8] que lo dividiremos en 1000 puntos, ya que con estos nuestra solución es lo suficientemente 
-    precisa y no lleva un tiempo de computación excesivamente largo.\\
-    En nuestro método de diferencias finitas obtenemos las siguientes energías:\\
+    
+    Para nuestras soluciones numéricas usaremos la frecuencia del oscilador $\omega=1$ la constante de Planck $\hbar=1$ y la masa $m=1$ con el objetivo de facilitar los cálculos.\\
+    
+    Definimos nuestro potencial como $V=\frac{1}{2}m\omega^2x^2$ y trabajamos en el intervalo [-8,8] dividido en 1000 puntos, ya que con estos parámetros nuestra solución es lo suficientemente precisa y no lleva un tiempo de computación excesivamente largo.\\
+    
+    De nuestro método de diferencias finitas obtenemos las siguientes energías:\\
+    
         \begin{table}[H]
             \centering
             \begin{tabular}{|c||c||c|}
             \hline
-             Nivel de Energía& Solución Numérica &Solución Analítica \\ [0.5ex] 
+             $E_n$& Solución Numérica &Solución Analítica \\ [0.5ex] 
             \hline\hline
-            0& 0.499991 & 0.500000 \\
+            $E_0$& 0.499991 & 0.500000 \\
             \hline
-             1& 1.499959 & 1.500000 \\
+            $E_1$& 1.499959 & 1.500000 \\
             \hline
-             2& 2.499895 &  2.500000\\
+            $E_2$& 2.499895 &  2.500000\\
             \hline
-             3& 3.499800  & 3.500000 \\
+            $E_3$& 3.499800  & 3.500000 \\
             \hline
-             4& 4.499671 & 4.500000\\
+            $E_4$& 4.499671 & 4.500000\\
             \hline
-             5& 5.499511 & 5.500000 \\
+            $E_5$& 5.499511 & 5.500000 \\
             \hline
-             6& 6.499319 & 6.500000 \\
+            $E_6$& 6.499319 & 6.500000 \\
             \hline
-             7& 7.499094  & 7.500000 \\
+            $E_7$& 7.499094  & 7.500000 \\
             \hline
-             8& 8.498838 & 8.500000 \\
+            $E_8$& 8.498838 & 8.500000 \\
             \hline
-             9& 9.498549 & 9.500000 \\
+            $E_9$& 9.498549 & 9.500000 \\
             \hline
-             10& 10.498228 & 10.500000 \\
+            $E_10$& 10.498228 & 10.500000 \\
             \hline
-             11& 11.497875& 11.500000 \\
+             $E_11$& 11.497875& 11.500000 \\
             \hline
-             12& 12.497490 & 12.500000 \\
+            $E_12$& 12.497490 & 12.500000 \\
             \hline
-             13& 13.497075 & 13.500000 \\
+            $E_13$& 13.497075 & 13.500000 \\
             \hline
-             14& 14.496624 & 14.500000 \\
+            $E_14$& 14.496624 & 14.500000 \\
             \hline
-             15& 15.496143 & 15.500000 \\
+            $E_15$& 15.496143 & 15.500000 \\
             \hline
             \end{tabular}
-            \caption{Tabla de Soluciones de energías OAC}
+            \caption{Tabla de soluciones de energías del OAC.}
             \end{table}
-    Se puede apreciar un ligero error de nuestras soluciones, esto es debido al error propio del método de diferencias finitas, ya que nuestro paso en este caso era de $h=0.16$.
+            
+    Se puede apreciar un ligero error de nuestras soluciones. Esto es debido al error propio del método de diferencias finitas, ya que nuestro paso en este caso era de $h=0.16$.\\
     
-    Ahora mostraremos nuestros autovectores obtenidos de manera numérica, pero es importante resaltar que estos acumulan el error de diferenfcias finitas y del método que usemos para la normalización de estos, en este caso usaremos Simpson porque ese la que menos error presenta,
-    pero esto será expuesto más adelante en la sección de estudio de errores.
+    Ahora mostraremos nuestros autovectores obtenidos de manera numérica, pero es importante resaltar que estos acumulan el error de diferencias finitas y del método que usemos para la normalización de estos, en este caso usaremos Simpson porque ese la que menos error presenta. Sin embargo, esto será expuesto más adelante en la sección de estudio de errores.
     
     \begin{figure}[H]
         \centering
-        \includegraphics[width=4in]{fotos/16funcionesoscilador.jpg}
-        \caption{Se muestran los 16 vectores normalizados}
+        \includegraphics[width=0.9\textwidth]{fotos/16funcionesoscilador.jpg}
+        \caption{Se muestran los 16 vectores normalizados.}
         \label{PolinomiosHermite}
     \end{figure}
-    Aquí cada nivel lo hemos separado sumando a cada función su nivel de energía más uno para que fuese más legible pero realmente todas tienden a 0 en los extremos y estan normalizadas.\\
-    Además nuestro código de diferencias finitas nos devolvía los vectores con un desfase de $\pi$ como ya fue expuesto en el pozo infinito asi que también hubo que ajustarlo. \\\\
     
-    Si nos acercamos al punto marcado podemos ver que nuestra función para el nivel 15 no es exactamente igual que la solución analítica pero es un error muy pequeño como para que podamos apreciarlo, esto punto es uno de los que más difiere puesto que 
-    a mayor nivel de energía más error nos encontramos, esto también era visible en los errores de energía, a mayor error en la autovector mayor error en su autovalor asociado.
+    Aquí cada nivel lo hemos separado sumando a cada función su nivel de energía más uno para que fuese más legible pero realmente todas tienden a 0 en los extremos y están normalizadas.\\
+    
+    Además nuestro código de diferencias finitas nos devolvía los vectores con un desfase de $\pi$ como ya fue expuesto en el pozo infinito así que también hubo que ajustarlo. \\
+    
+    Si nos acercamos al punto marcado podemos ver que nuestra función para el nivel 15 no es exactamente igual que la solución analítica pero es un error muy pequeño como para que podamos apreciarlo, este punto es uno de los que más difiere puesto que a mayor nivel de energía más error nos encontramos. Esto también era visible en los errores de energía, a mayor error en la autovector mayor error en su autovalor asociado.
+    
     \begin{figure}[H]
         \centering
-        \includegraphics[width=4in]{fotos/diferenciaentrefunciones.jpg}
-        \caption{Diferencia analítica y numérica}
+        \includegraphics[width=0.9\textwidth]{fotos/diferenciaentrefunciones.jpg}
+        \caption{Diferencia analítica y numérica.}
         \label{PolinomiosHermite}
     \end{figure}
-
 
     \subsection{Pozo de potencial finito}
+    
     \subsubsection{Soluciones analíticas}
+    
     \textbf{\underline{Características principales}}\\
     
 Un pozo de potencial finito es una de las estructuras básicas utilizadas
@@ -1149,19 +1182,23 @@ Mientras que las soluciones analíticas son las siguientes:
 De nuevo, se han usado un total de 1000 puntos y un total de 5 
 funciones. Mediante este método de normalización se han obtenido
 las siguientes soluciones numéricas:
+
 \newpage
 \begin{figure}[H]
 \centering
 \includegraphics[scale=0.5]{trap.jpg}
 \end{figure} 
+
+
 \section{Estudio de errores para las soluciones obtenidas} \label{sec:errores}
 
 En esta sección vamos a centrarnos en estudiar los errores que cometemos a la hora de aproximar las soluciones, es decir, trataremos de ilustrar el error que tienen asociado los métodos numéricos que hemos empleado para obtener los resultados que hemos mostrado en el trabajo.\\
 
-Los parámetros de la simulación se indicarán en cada apartado pero el procedimiento será general para sendos.\\ 
+Los parámetros de la simulación se indicarán en cada apartado pero el procedimiento será general para sendos. Primero calcularemos el error como describimos a continuación y lo representaremos en función del paso o del número de puntos dependiendo del apartado (un caso es análogo al otro). Posteriormente transformaremos esa gráfica a la misma pero tomando logaritmos en ambos miembros para una mejor visualización.\\ 
 
-Calcularemos la raiz del error cuadrático medio tanto de energías como de funciones para diferentes pasos, teóricamente según se reduce el paso el error cometido también debe descender, para comprobar esto graficaremos nuestros resultados y veremos si siguen esta tendencia. \\
-La raiz del error cuadrático medio (RMSE) para las energías será:
+La forma que vamos a seguir para estudiar el error será calcular la raíz del error cuadrático medio tanto de energías como de funciones para diferentes pasos. Teóricamente, según se reduce el paso, el error cometido también debe descender, para comprobar esto graficaremos nuestros resultados y veremos si siguen esta tendencia. \\
+
+La raíz del error cuadrático medio (RMSE) para las energías será:
 
 \[
 \text{RMSE} = \sqrt{\frac{1}{n} \sum_{i=1}^{n} (E_i - \hat{E}_i)^2}
@@ -1174,7 +1211,7 @@ Donde:
     \item \( \hat{E}_i \) es la energía numérica del nivel i.
 \end{itemize}
 
-La raiz del error cuadrático medio (RMSE) para las autofunciones se calculara como:
+La raíz del error cuadrático medio (RMSE) para las autofunciones se calculara como:
 
 \[
 \text{RMSE} =\sqrt{\frac{1}{n}\sum_{i=1}^{n}\frac{1}{N} \sum_{k=1}^{N} (\psi_n(x_k) - \hat{\psi}_n(x_k))^2}
@@ -1190,40 +1227,105 @@ Donde:
 
     \subsection{Pozo de potencial infinito}
 
+    \subsubsection{Error en las energías}
+
+    A continuación se va a representar como varía el error en los niveles de energía en función del número de puntos que tomemos para realizar la discretización del espacio (cuantos más puntos, menor será el paso, por lo que se podría hacer un gráfico análogo del error en función del paso). Para la simulación vamos a coger valores de N comprendidos entre 10 y 500. 
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.9\textwidth]{fotos/error_ener_infinito_500.jpg}
+        \caption{Raíz del error cuadrático medio en las energías (Error), según el número de puntos (N).}
+        \end{figure} 
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.9\textwidth]{fotos/logerror_ener_infinito_500.jpg}
+        \caption{Logaritmo de la raíz del error cuadrático medio en las energías (~log(Error)~), según el logaritmo del número de puntos (~log(h)~).}
+        \end{figure}
+
+    \subsubsection{Error en las funciones}
+
+    Y ahora se mostrará la evolución del error para las funciones según el número de puntos. Al igual que antes, N tomará valores desde 10 hasta 500. La normalización de las funciones se ha hecho mediante el método de Simpson para la integración numérica.
     
+
     
     \subsection{Oscilador armónico cuántico}
+
+    \subsubsection{Error en las energías}
+
+    A continuación mostraremos como evoluciona el error en las energías en función del paso que utilicemos en nuestros métodos de aproximación. Lo realizaremos viendo como varía el mismo si dividimos el espacio con N puntos donde N toma valores desde 10 hasta 500.
+    
     \begin{figure}[H]
         \centering
-        \includegraphics[scale=0.5]{errorpasoN500.jpg}
-        \caption{raiz del error cuadrático medio en las energías (Error) según el paso(h)}
+        \includegraphics[width=0.9\textwidth]{errorpasoN500.jpg}
+        \caption{Raíz del error cuadrático medio en las energías (Error), según el paso (h).}
         \end{figure} 
+        
     \begin{figure}[H]
         \centering
-        \includegraphics[scale=0.5]{errorpaso500Nlog.jpg}
-        \caption{logaritmo de la raiz del error cuadrático medio en las energías (log(Error)) según el  logaritmo del paso(log(h))}
+        \includegraphics[width=0.9\textwidth]{errorpaso500Nlog.jpg}
+        \caption{Logaritmo de la raíz del error cuadrático medio en las energías (~log(Error)~), según el  logaritmo del paso (~log(h)~).}
         \end{figure}
+
+     \subsubsection{Error en las funciones}
+
+    Ahora mostraremos la evolución del error en las funciones en función, como anteriormente, del paso. Aclaramos aquí que se elige el método de Simpson para normalizar las autofunciones que comparamos con las analíticas. Los valores de N permanecen igual que para el apartado de las energías (de 10 a 500).
+        
     \begin{figure}[H]
         \centering
-        \includegraphics[scale=0.5]{errorfuncionsegunpaso500N.jpg}
-        \caption{raiz del error cuadrático medio en las funciónes (Error) según el paso(h)}
+        \includegraphics[width=0.9\textwidth]{errorfuncionsegunpaso500N.jpg}
+        \caption{Raíz del error cuadrático medio en las funciones (Error), según el paso (h).}
         \end{figure} 
+        
     \begin{figure}[H]
         \centering
-        \includegraphics[scale=0.5]{errorfuncionsegunpasoN500log.jpg}
-        \caption{logaritmo de la raiz del error cuadrático medio en las funciónes (log(Error)) según el logaritmo del paso (log(h))}
+        \includegraphics[width=0.9\textwidth]{errorfuncionsegunpasoN500log.jpg}
+        \caption{Logaritmo de la raíz del error cuadrático medio en las funciones (~log(Error)~), según el  logaritmo del paso (~log(h)~).}
         \end{figure}  
+        
     \subsection{Métodos de integración}
-    \begin{figure}[H]
-        \centering
-        \includegraphics[scale=0.5]{comparacionn500.jpg}
-        \end{figure}  
-    \begin{figure}[H]
-        \centering
-        \includegraphics[scale=0.5]{comparaciónn500log.jpg}
-        \end{figure}  
-    \subsection{Pozo de potencial finito}
+
+    Esta sección es de verdadero interés pues representa un tipo de inconveniente que nos hemos encontrado realizando el trabajo. Nuestro código es capaz de realizar la normalización de las autofunciones tanto con el método de los trapecios como con el de Simpson. Sin embargo, cuando representamos la convergencia de uno frente a la de otra nos encontramos con lo siguiente:
+
+        \begin{figure}[H]
+    \centering
+    \begin{subfigure}{1\textwidth}
+            \includegraphics[width=0.9\textwidth]{comparacionn500.jpg}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{1\textwidth}
+            \includegraphics[width=0.9\textwidth]{comparaciónn500log.jpg}
+    \end{subfigure}
+    \caption{Encima el error de ambos métodos en función del paso. Debajo la misma gráfica pero tomando logaritmos en las variables de los ejes.}
+    \end{figure}
+
+¡Nos encontramos con que ambos métodos nos ofrecen la misma convergencia! ¿Como es esto posible?, el error del método de Simpson es de orden $h^4$ mientras que el de trapecios va como $h^2$. Después de comprobar si existían errores que pudieran llevar a conclusiones equivocadas, encontramos un motivo del por qué esto puede ser así.\\
+
+Cuando el método de diferencias finitas nos devuelve las autofunciones sin normalizar, estas ya poseen un error asociado  este método numérico, precisamente de orden $h^2$. Nosotros realizamos la normalización de estos autovectores con dos métodos distintos, sí, pero en ambos casos esos vectores proceden del mismo sitio con el mismo error de procedencia.\\
+
+Esto puede provocar entonces que los dos métodos de integración se comporten igual a la hora de normalizar y desde luego explicaría la razón de por qué al graficar el error de uno frente al del otro ambos se comporten igual.
+    
 \section{Consideraciones: Ecuación dependiente del tiempo}
+
+RUNGE K(LITORIS)UTTA 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 \newpage
 \section{Anexo}
@@ -1237,7 +1339,7 @@ Este script inicial es \textit{THE\_MAIN.tex}, el cual a la hora de ejecutarse l
 \begin{itemize}
     \item Soluciones: El usuario entonces deberá ingresar los límites del dominio, el número de puntos con los que dividir el espacio y el número de autofunciones que debe mostrar.
 
-    \item Errores: A lo anterior hay que añadirle el número mínimo de puntos y el máximo para ver como evoluciona el error según el paso de discretización (a menos puntos, mayor el paso). Como se enseñará el error en las energías y el error en las funciones, para este segundo el programa también pedirá si la normalización se hará mediante el método de los trapecios o mediante el método de Simpson.
+    \item Errores: A lo anterior hay que añadirle el número mínimo de puntos (el cual no debe ser inferior a 10) y el máximo para ver como evoluciona el error según el paso de discretización (a menos puntos, mayor el paso). Como se enseñará el error en las energías y el error en las funciones, para este segundo el programa también pedirá si la normalización se hará mediante el método de los trapecios o mediante el método de Simpson.
 
 \end{itemize}
 
