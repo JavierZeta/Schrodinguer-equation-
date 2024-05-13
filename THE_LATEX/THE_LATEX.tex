@@ -25,7 +25,7 @@
 \vspace{1cm}
 {\textbf{{\Huge Resolución Numérica de la Ecuación de Schrödinger}} \par}
 \vspace{1.5cm}
-{\includegraphics[scale=0.8]{portada}\par}
+{\includegraphics[scale=0.8]{portada.jpg}\par}
 \vspace{1cm}
 {\scshape\Large Abril 2024 \par}
 \vspace{1.5cm}
@@ -1142,11 +1142,14 @@ Como vemos, las constantes de normalización dependen de los  valores de la ener
 Para este pozo se ha usado el valor para la profundida del pozo
 de: $V_0=50$ (unidades arbitrarias). Además, como en el ordenador
 no podemos incluir el infitio como en la definición formal, hemos 
-decidido usar como aproximación en los extremos de análisis $\pm 15$.
+decidido usar como aproximación en los extremos de análisis $\pm 8$ ya
+que, como veremos más adelante, con poner estos intervalos como
+aproximación es suficiente para ver sin problemas el comportamiento
+de las funciones de onda para este potencial.
 Por último, hemos decidido situar el pozo en la región de -5 a 5. \\
 \par
 Teniendo todo esto en cuenta, hemos obtenido las siguientes constantes
-de normalización: $A=B=0,44$ y $C=$. Para ello, hemos usado la definición
+de normalización: $A=B=0,44$ y $C=\pm 6.1\cdot 10^{14}$. Para ello, hemos usado la definición
 de normalización:
 \begin{equation}
 \int_{a}^{b} \psi^{*}(x) \psi(x) \,dx=1
@@ -1159,37 +1162,76 @@ y las compararemos con las obtenidas analíticamente.
 
 \subsubsection{Soluciones numéricas}
 
-\textbf{\underline{Normalización mediante método Simpson}}\\
-
 Las soluciones numéricas han sido obtenidas para un número 
-N=1000 puntos y un total de 5 funciones. Las soluciones numéricas
+N=1000 puntos y un total de 5 funciones. Las soluciones analíticas
 para esas funciones son: 
 
 \begin{figure}[H]
     \centering
-    \includegraphics[scale=0.5]{numericas.jpg}
+    \includegraphics[width=1.0\textwidth]{analiticas.jpg}
+    \caption{Primeras 5 soluciones analíticas del pozo de potencial finito}
 \end{figure}
 
-Mientras que las soluciones analíticas son las siguientes:
+Mientras que las soluciones numéricas son las siguientes:
 
 \begin{figure}[H]
     \centering
-    \includegraphics[scale=0.5]{analiticas.jpg}
+    \includegraphics[width=1.0\textwidth]{numericas.jpg}
+    \caption{Primeras 5 soluciones numéricas del pozo de potencial finito}
 \end{figure} 
-
-\textbf{\underline{Normalización mediante método de los trapecios}}\\
-
-De nuevo, se han usado un total de 1000 puntos y un total de 5 
-funciones. Mediante este método de normalización se han obtenido
-las siguientes soluciones numéricas:
-
-\newpage
+Como es fácilmente observable, las aproximaciones numéricas
+son bastante aceptables. Algo que confirmaremos en el tratamiento
+de errores. \\
+\par 
+Además, hemos equiespaciado dentro del pozo las funciones de onda
+por dos motivos: El primero es que es más sencilla la visualización
+de todas las ondas de este modo; Y el segundo es debido a que,
+como veremos a continuación, la energía que transporta esta 
+función de onda es negativa. Esto quiere decir que estamos 
+estudiando estados ligados y, por tanto, la mejor manera para 
+visualizar estos estados es con las funciones de onda dentro del
+pozo, no por encima de él. \\
+\par
+Con esta aclaración hecha, vamos a proceder a enseñar las 
+energías analíticas y numéricas con su respectiva tabla de 
+errores:
 \begin{figure}[H]
-\centering
-\includegraphics[scale=0.5]{trap.jpg}
+    \centering
+    \includegraphics[width=1.0\textwidth]{energias_finito_analit.jpg}
+    \caption{5 primeras energías analíticas para el pozo de potencial finito}
 \end{figure} 
-
-
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1.0\textwidth]{energias_finito_numerico.jpg}
+    \caption{5 primeras energías numéricas para el pozo de potencial finito}
+\end{figure} 
+La tabla de errores nos arroja los siguientes resultados:
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c|c|c||}
+    \hline
+    Nivel de energía($E_n$) & Energía analítica & Energía numérica \\
+    \hline  
+    1 & -49,95065198 & -49,95251866  \\
+    \hline
+    2 & -49,80260791 & -49,81007930  \\
+    \hline
+    3 & -49,5558678 & -49,57269590   \\
+    \hline
+    4 & -49,21043165 & -49,24039191  \\
+    \hline
+    5 & -48,76629945 & -48,81320046  \\
+    \hline
+    \end{tabular}
+    \caption{Energías del pozo de potencial finito.}
+ \end{table}
+Vemos que, según la energía va siendo mayor, el error se hace 
+cada vez más grande. El principal motivo es que, como ya ha sido 
+mencionado antes, las energías analíticas se obtienen a partir 
+de una aproximación a la solución real. Con lo cual, esto provoca
+que la discrepancia entre resultados sea mayor. Sin embargo,
+debido a que el orden de error es bastante bajos, podemos dar
+como válidas nuestras soluciones numéricas.
 \section{Estudio de errores para las soluciones obtenidas} \label{sec:errores}
 
 En esta sección vamos a centrarnos en estudiar los errores que cometemos a la hora de aproximar las soluciones, es decir, trataremos de ilustrar el error que tienen asociado los métodos numéricos que hemos empleado para obtener los resultados que hemos mostrado en el trabajo.\\
