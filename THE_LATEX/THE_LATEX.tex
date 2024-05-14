@@ -1349,7 +1349,20 @@ Esto puede provocar entonces que los dos métodos de integración se comporten i
     
 \section{Consideraciones: Ecuación dependiente del tiempo}
 
-RUNGE K(LITORIS)UTTA 
+Es importante mencionar que una vez resuelta nuestra ecuación independiente del tiempo ahora nos sería posible resolver la ecuación dependiente del tiempo. Esta ecuación es:
+\begin{equation}
+    i\hbar \frac{\partial}{\partial t} \Psi(x, t) = -\frac{\hbar^2}{2m} \frac{\partial^2}{\partial x^2} \Psi(x, t) + V(x, t) \Psi(x, t)
+\end{equation}
+\begin{equation}
+    i\hbar \frac{\partial}{\partial t} \Psi(x, t) = H \Psi(x, t)
+\end{equation}
+\begin{equation}
+    i\hbar \frac{\partial}{\partial t} \Psi(x, t) = E \Psi(x, t)
+\end{equation}
+Vemos que en esta ecuación ya conocemos las energías debido a que estas son invariantes en el tiempo, por tanto, nuestro problema se convierte en el cálculo de una ecuación diferencial.
+Para resolverlo podemos usar simplemente el método de
+RUNGE K(LITORIS)UTTA y como condiciones iniciales le pasamos las funciones de onda a tiempo 0 $\Psi(x,0)$
+
 
 
 
