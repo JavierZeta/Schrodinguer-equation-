@@ -42,25 +42,7 @@ H= -hbar^2 * T / (2 * m * h^2) + V;  % Incluye las constantes en el Hamiltoniano
 [val, z] = sort(diag(val));
 
 
-% Normalización de las energías
+% Selección energías 
 
 z = z(1:numerovec);
 energies=val(z);
-%{
-energies = val(z) / val(z(1));
-disp(energies);
-%}
-% Ploteamos las funciones
-%{
-figure('Position', [10 10 1200 1000])
-for i = 1:length(z)
-    y = [0; vec(:, z(i)); 0];
-    plot(x, y, 'LineWidth', 3, 'DisplayName', num2str(i-1));
-    hold on;
-end
-xlabel('x', 'FontSize', 14)
-ylabel('\psi(x)', 'FontSize', 14)
-legend
-title(' Wavefunctions for a harmonic oscillator using finite difference method', 'FontSize', 14)
-hold off;
-%}
