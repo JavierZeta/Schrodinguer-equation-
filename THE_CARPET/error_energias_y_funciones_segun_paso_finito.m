@@ -28,17 +28,17 @@ function error_energias_y_funciones_segun_paso_finito(N_values,a, b, numerovec)
 
            [vecnorm]=normalizacion(vec,area,numerovec,N_values(i));
 
-           error=calculo_error_finito_2(v,vecnorm,numerovec,energias);
+           error=calculo_error_finito_2(v,vecnorm,numerovec,energias,a,b);
 
         % hago la resta de las energias numericas - las analiticas y me
         % queda un vector fila con esta diferencia 
-        errorvector= abs(abs(energias)-abs(energies));
+        errorvector= abs(energias-energies);
         %hago la media de los errores para esta N haciendo la media de
         %este vector
 
-        error_values(i) = max(errorvector);
+        error_values(i) = sqrt(mean(errorvector));
 
-         error_values_f(i) = max(error);
+         error_values_f(i) = sqrt(mean(error));
          
     end
 
@@ -47,25 +47,26 @@ function error_energias_y_funciones_segun_paso_finito(N_values,a, b, numerovec)
     hold on;
 
     % Trazar el error en función de N
-    plot(log(h_rep), log(error_values), 'DisplayName', 'Error');
+    scatter(log(h_rep), log(error_values),'DisplayName', 'Error','Marker', '.', 'MarkerEdgeColor', 'b');
+    
 
     % Añadir etiquetas y leyenda
-    xlabel('log(N)');
+    xlabel('log(h)');
     ylabel('log(Error)');
-    title('Error del método para energías en función de N');
+    title('Error logarítmico del método para energías en función de h');
     legend;
     hold off;
 
     figure;
     hold on;
 
-    % Trazar el error en función de N
-    plot(h_rep, error_values, 'DisplayName', 'Error');
+    % Trazar el error en función de h
+    scatter(h_rep,error_values,'DisplayName', 'Error','Marker', '.', 'MarkerEdgeColor', 'b');
 
     % Añadir etiquetas y leyenda
-    xlabel('N');
+    xlabel('h');
     ylabel('Error');
-    title('Error del método para energías en función de N');
+    title('Error del método para energías en función de h');
     legend;
     hold off;
 
@@ -73,26 +74,26 @@ function error_energias_y_funciones_segun_paso_finito(N_values,a, b, numerovec)
     figure;
     hold on;
 
-    % Trazar el error en función de N
-    plot(log(h_rep), log(error_values_f), 'DisplayName', 'Error');
+    % Trazar el error en función de h
+    scatter(log(h_rep), log(error_values_f),'DisplayName', 'Error','Marker', '.', 'MarkerEdgeColor', 'b');
 
     % Añadir etiquetas y leyenda
-    xlabel('log(N)');
+    xlabel('log(h)');
     ylabel('log(Error)');
-    title('Error del método para funciones en función de N');
+    title('Error logarítmico del método para funciones en función de h');
     legend;
     hold off;
 
     figure;
     hold on;
 
-    % Trazar el error en función de N
-    plot(h_rep, error_values_f, 'DisplayName', 'Error');
+    % Trazar el error en función de h
+    scatter(h_rep,error_values_f,'DisplayName', 'Error','Marker', '.', 'MarkerEdgeColor', 'b');
 
     % Añadir etiquetas y leyenda
-    xlabel('N');
+    xlabel('h');
     ylabel('Error');
-    title('Error del método para funciones en función de N');
+    title('Error del método para funciones en función de h');
     legend;
     hold off;
 end
