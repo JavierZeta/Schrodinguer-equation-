@@ -18,8 +18,6 @@ f_4=cell(numerovec,1);
 
 f_5=cell(numerovec,1);
 
-transicion = 0.05;
-
 contador = 1;
 
 for i=1 : numerovec
