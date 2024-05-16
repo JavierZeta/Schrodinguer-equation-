@@ -1360,9 +1360,16 @@ Es importante mencionar que una vez resuelta nuestra ecuación independiente del
     i\hbar \frac{\partial}{\partial t} \Psi(x, t) = E \Psi(x, t)
 \end{equation}
 Vemos que en esta ecuación ya conocemos las energías debido a que estas son invariantes en el tiempo, por tanto, nuestro problema se convierte en el cálculo de una ecuación diferencial.
-Para resolverlo podemos usar simplemente el método de
-RUNGE K(LITORIS)UTTA y como condiciones iniciales le pasamos las funciones de onda a tiempo 0 $\Psi(x,0)$
-
+Para resolverlo podemos usar por ejemplo el método de Runge-Kutta y como condiciones iniciales establecemos las funciones de onda a tiempo $t=0$ $\Psi(x,0)$ que serán nuestras funciones $\Psi(x)$ ya que si suponemos las soluciones estacionarias:
+\[
+    \Psi(x,t)=\Psi(x)g(t)
+    \]
+\[
+    g(t)=e^{\frac{i}{\hbar}Et} \:\: \text{por tanto}\:\: g(0)=1
+\]
+\[
+    \Psi(x,0)=\Psi(x)
+\]
 
 
 

@@ -1,0 +1,36 @@
+\babel@toc {spanish}{}\relax 
+\contentsline {section}{\numberline {1}Introducción}{2}{}%
+\contentsline {subsection}{\numberline {1.1}Deducción de la ecuación de Schrödinger independiente del tiempo}{2}{}%
+\contentsline {subsection}{\numberline {1.2}Interpretación de la ecuación de Schrödinger y sus soluciones}{3}{}%
+\contentsline {section}{\numberline {2}Métodos de derivación numérica}{4}{}%
+\contentsline {subsection}{\numberline {2.1}Método de las diferencias finitas}{4}{}%
+\contentsline {subsubsection}{\numberline {2.1.1}Diferencial de primer orden}{5}{}%
+\contentsline {subsubsection}{\numberline {2.1.2}Diferencial de segundo orden}{7}{}%
+\contentsline {subsubsection}{\numberline {2.1.3}Error de aproximación en el método de las diferencias finitas}{8}{}%
+\contentsline {subsection}{\numberline {2.2}Aproximación de la ecuación de Schrödinger}{8}{}%
+\contentsline {section}{\numberline {3}Métodos de integración numérica}{10}{}%
+\contentsline {subsection}{\numberline {3.1}Regla de los trapecios}{10}{}%
+\contentsline {subsubsection}{\numberline {3.1.1}Error de aproximación en la regla de trapecios}{12}{}%
+\contentsline {subsection}{\numberline {3.2}Regla de Simpson}{13}{}%
+\contentsline {subsubsection}{\numberline {3.2.1}Regla de Simpson compuesta}{14}{}%
+\contentsline {subsubsection}{\numberline {3.2.2}Error de aproximación en la regla de Simpson}{15}{}%
+\contentsline {section}{\numberline {4}Soluciones de la Ecuación de Schrödinger}{16}{}%
+\contentsline {subsection}{\numberline {4.1}Pozo de potencial infinito}{16}{}%
+\contentsline {subsubsection}{\numberline {4.1.1}Soluciones analíticas}{16}{}%
+\contentsline {subsubsection}{\numberline {4.1.2}Soluciones numéricas}{17}{}%
+\contentsline {subsection}{\numberline {4.2}Oscilador armónico cuántico}{23}{}%
+\contentsline {subsection}{\numberline {4.3}Pozo de potencial finito}{27}{}%
+\contentsline {subsubsection}{\numberline {4.3.1}Soluciones analíticas}{27}{}%
+\contentsline {subsubsection}{\numberline {4.3.2}Construcción del pozo de potencial}{28}{}%
+\contentsline {subsubsection}{\numberline {4.3.3}Soluciones numéricas}{29}{}%
+\contentsline {section}{\numberline {5}Estudio de errores para las soluciones obtenidas}{33}{}%
+\contentsline {subsection}{\numberline {5.1}Pozo de potencial infinito}{34}{}%
+\contentsline {subsubsection}{\numberline {5.1.1}Error en las energías}{34}{}%
+\contentsline {subsubsection}{\numberline {5.1.2}Error en las funciones}{35}{}%
+\contentsline {subsection}{\numberline {5.2}Oscilador armónico cuántico}{35}{}%
+\contentsline {subsubsection}{\numberline {5.2.1}Error en las energías}{35}{}%
+\contentsline {subsubsection}{\numberline {5.2.2}Error en las funciones}{37}{}%
+\contentsline {subsection}{\numberline {5.3}Métodos de integración}{38}{}%
+\contentsline {section}{\numberline {6}Consideraciones: Ecuación dependiente del tiempo}{40}{}%
+\contentsline {section}{\numberline {7}Anexo}{41}{}%
+\contentsline {subsection}{\numberline {7.1}Códigos de MATLAB}{41}{}%
