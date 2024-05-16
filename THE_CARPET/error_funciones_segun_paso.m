@@ -22,17 +22,15 @@ function [average_error]=error_funciones_segun_paso(N_values, Vpot, a, b, numero
         vecnorm = normalizacion_oscilador(vec,area,numerovec, N_values(i));
         [psi_mat] = schrodinger_solutions_analiticas_errores(numerovec,a,b,N_values(i));
 
- %TO DO: restar los valores absolutos de vecnorm y psi_mat y obtener el
- %error cuadratico medio de cada autofunción
  % hacer la media de los errores cuadraticos medios para cada autofunción 
  
         % Initialize the error vector
         error_values = zeros(numerovec, 1);
 
-        % Calculate the MSE for each eigenfunction
+        % Calcula RMSE para cada función
         for j = 1:numerovec
             diff = abs(abs(vecnorm(:,j)) - abs(psi_mat(:,j)));
-            error_values(j) = mean(diff.^2);
+            error_values(j) = sqrt(mean(diff.^2));
         end
         
         % Calculate the average of the MSEs
