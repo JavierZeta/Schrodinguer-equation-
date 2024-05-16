@@ -26,22 +26,22 @@ function [average_error]=error_funciones_segun_paso_infinito(N_values, Vpot, a, 
         % Initialize the error vector
         error_values = zeros(numerovec, 1);
 
-        % Calculate the MSE for each eigenfunction
+        % Calculamos el error cuadrático medio para cada autofuncion
         for j = 1:numerovec
             diff = abs(abs(vecnorm(:,j)) - abs(funciones_anal(:,j)));
             error_values(j) = mean(diff.^2);
         end
         
-        % Calculate the average of the MSEs
-        average_error(i) = mean(error_values);
+        % Calculamos la media de los errores cuadráticos medios
+        average_error(i) = sqrt(mean(error_values));
     end
 
     % Crear una nueva figura
     figure;
     hold on;
 
-    % Trazar el error en función de N
-    plot(log(N_values), log(average_error), 'DisplayName', 'Error');
+    % Trazar el log del error en función del log de N
+    scatter(log(N_values), log(average_error), 'DisplayName', 'Error','Marker', '.', 'MarkerEdgeColor', 'b');
 
     % Añadir etiquetas y leyenda
     xlabel('log(N)');
@@ -54,8 +54,7 @@ function [average_error]=error_funciones_segun_paso_infinito(N_values, Vpot, a, 
     hold on;
 
     % Trazar el error en función de N
-    plot(N_values, average_error, 'DisplayName', 'Error');
-
+    scatter(N_values, average_error, 'DisplayName', 'Error','Marker', '.', 'MarkerEdgeColor', 'b');
     % Añadir etiquetas y leyenda
     xlabel('N');
     ylabel('Error');

@@ -18,13 +18,21 @@ area = regla_Simpson(vec,h,numerovec); %vector de areas, guarda las areas de cad
     hold on
 for i=1:numerovec
     f=@(x) (sqrt(2/(b-a)))*sin(((i)*pi/(b-a))*x);
-    plot(v,f(v),'Linewidth',2,'DisplayName', sprintf('\\psi_%d', i-1));
+    plot(v,f(v)+2*i,'Linewidth',2,'DisplayName', sprintf('\\psi_%d', i));
     legend
+    if i==numerovec
+    lim_y=2*i+1;
+    end
+
 end
     title('Soluciones analíticas para el pozo infinito según el nivel de energía')
     xlabel('x')
     ylabel('\psi_n(x)')
-    axis tight
+    ylim([2,lim_y])
+    xlim([a-1,b+1])
+    % Graficar el potencial
+    [x,pozo] = dibujo_pozo_infinito(a,b,N);
+    plot(x, pozo, 'LineWidth', 1,'DisplayName','Pozo infinito','Color','k');
     hold off
 
 %PLOT SOL. NUMÉRICAS JUNTAS
@@ -32,40 +40,45 @@ end
 % Ploteamos las funciones 
 figure
 for i = 1:length(z)
-    y = [0; vec(:, z(i)); 0];
-    plot(v, y, 'LineWidth', 1, 'DisplayName', num2str(i-1));
+    y = [2*i; vecnorm(:, z(i))+2*i; 2*i];
+    plot(v, y, 'LineWidth', 2, 'DisplayName', sprintf('\\psi_%d', i));
+    axis tight
     hold on;
 end
 xlabel('x', 'FontSize', 14)
-ylabel('\psi(x)', 'FontSize', 14)
+ylabel('\psi_n(x)', 'FontSize', 14)
 legend
 title('Soluciones numéricas normalizadas según el nivel de energía', 'FontSize', 14)
-axis tight
+    ylim([2,lim_y])
+    xlim([a-1,b+1])
+    % Graficar el potencial
+    [x,pozo] = dibujo_pozo_infinito(a,b,N);
+    plot(x, pozo, 'LineWidth', 1,'DisplayName','Pozo infinito','Color','k');
 hold off;
 
 
-%PLOTS SOLUCION ANALITICA VS NUMERICA POR NIVEL DE ENRGÍA
+%PLOTS SOLUCION ANALITICA VS NUMERICA POR NIVEL DE ENERGÍA
 for i=1:numerovec
     f=@(x) (sqrt(2/(b-a)))*sin(((i)*pi/(b-a))*x);
 
     figure(i+2)
     hold on
 
-    plot(v,f(v),'Linewidth',1,'DisplayName', sprintf('\\psi_%d', i-1));
-    leyendas=sprintf('\\psi_%d', i-1);
+    plot(v,f(v),'Linewidth',1,'DisplayName', sprintf('\\psi_%d', i));
+    leyendas=sprintf('\\psi_%d', i);
     legend(leyendas)
     
     title('Solución analítica vs Solución aproximada')
     xlabel('x')
     ylabel('\psi_n(x)')
     
-    plot(v,[0; vecnorm(:, z(i)); 0],'LineWidth', 1, 'DisplayName', sprintf('\\psi_%d aproximada', i-1));
+    plot(v,[0;vecnorm(:, z(i));0],'LineWidth', 1, 'DisplayName', sprintf('\\psi_%d aproximada', i));
     legend
 
     hold off
 end
 
-error = calculo_error_infinito(v,vecnorm,numerovec,b,a);
+error = calculo_error_infinito(v,vecnorm,numerovec,b);
 
 energias=zeros(numerovec,1);
 
@@ -75,6 +88,44 @@ for i=1 : numerovec
 
 end
 
+%PLOT ENERGÍA ANALÍTICA
+    figure
+    hold on
+for n = 1:numerovec
+    title('Niveles de energía analíticos')
+    line([a, b], [energias(n),energias(n)], 'Color', 'b');
+    text(a + 0.1, energias(n), ['E_', num2str(n)], 'Color', 'r');
+    plot(x, pozo, 'LineWidth', 1,'Color','k');
+    xlabel('x')
+    ylabel('E_n')
+    xlim([a-1,b+1])
+    ylim([0,energias(numerovec)+1])
+end
+    hold off
+
+%PLOT ENERGÍA NUMÉRICA
+    figure
+    hold on
+for n = 1:numerovec
+
+    title('Niveles de energía numéricos')
+    line([a, b], [energies(n),energies(n)], 'Color', 'b');
+    text(a + 0.1, energies(n), ['E_', num2str(n)], 'Color', 'r');
+    xlabel('x')
+    ylabel('E_n')
+    plot(x, pozo, 'LineWidth', 1,'Color','k');
+    xlabel('x')
+    ylabel('E_n')
+    xlim([a-1,b+1])
+    ylim([0,energias(numerovec)+1])
+end
+    hold off
+
 error_2=error_energia(energias,energies,numerovec);
+
+energies
+
+energias
+
 
 end
