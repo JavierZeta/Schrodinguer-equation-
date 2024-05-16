@@ -12,6 +12,9 @@
 \usepackage[a4paper, left=3cm, right=3cm, top=35mm, bottom=20mm]{geometry}
 \usepackage{blindtext}
 \usepackage{graphicx}
+\usepackage[backend=biber,style=apa,natbib=true]{biblatex}
+\addbibresource{referencias.bib}
+\setlength\bibitemsep{1.5\itemsep}
 
 \begin{document}
 
@@ -962,7 +965,9 @@ Los valores obtenidos tanto analítica como numéricamente se recogen en la sigu
 
 Con esto tenemos a disposición los resultados necesarios para ver que los procedimientos han sido correctos y que la aproximación, en primera instancia, es bastante aceptable dentro de los parámetros de la simulación. Queda pendiente el análisis de los errores que se realizará en la sección~\ref{sec:errores} de este trabajo.
 
-    \subsection{Oscilador armónico cuántico}
+        \subsection{Oscilador armónico cuántico}
+
+    \subsubsection{Soluciones analíticas}
 
     El oscilador armónico tiene una gran importancia en la física 
     y se utiliza en una amplia gama de campos debido a su capacidad para modelar una variedad de fenómenos naturales.\\
@@ -988,14 +993,14 @@ Con esto tenemos a disposición los resultados necesarios para ver que los proce
     Esta ecuación tiene como solución analítica las funciones de onda ya normalizadas:
     
     \begin{equation}
-        \psi _n\left(x\right)=\frac{1}{\sqrt[2]{2^n\cdot \:n!}\cdot \pi ^{\frac{1}{4}}}\cdot \:H_n\left(x\right)e^{-\frac{x^2}{2}}
+        \boxed{\psi _n\left(x\right)=\frac{1}{\sqrt[2]{2^n\cdot \:n!}\cdot \pi ^{\frac{1}{4}}}\cdot \:H_n\left(x\right)e^{-\frac{x^2}{2}}}
     \end{equation}
     
     Siendo los $H_n$ los correspondientes polinomios de Hermite, que son polinomios ortogonales con la siguiente forma:
     
     \begin{figure}[H]
         \centering
-        \includegraphics[width=0.8\textwidth]{fotos/PolinomiosHermite.png}
+        \includegraphics[width=0.9\textwidth]{fotos/PolinomiosHermite.png}
         \caption{Cuatro primeros polinomios de Hermite.}
         \label{PolinomiosHermite}
     \end{figure}
@@ -1003,8 +1008,11 @@ Con esto tenemos a disposición los resultados necesarios para ver que los proce
     Con energías asociadas de la forma:
     
     \begin{equation}
-        E_n=\left(n+\frac{1}{2}\right)\hbar \omega 
+        \boxed{E_n=\left(n+\frac{1}{2}\right)\hbar \omega }
     \end{equation}
+
+
+    \subsubsection{Soluciones numéricas}
     
     Para nuestras soluciones numéricas usaremos la frecuencia del oscilador $\omega=1$ la constante de Planck $\hbar=1$ y la masa $m=1$ con el objetivo de facilitar los cálculos.\\
     
@@ -1287,9 +1295,23 @@ Donde:
 
     \subsubsection{Error en las funciones}
 
-    Y ahora se mostrará la evolución del error para las funciones según el número de puntos. Al igual que antes, N tomará valores desde 10 hasta 500. La normalización de las funciones se ha hecho mediante el método de Simpson para la integración numérica.
-    
+        \subsubsection{Error en las funciones}
 
+    Y ahora se mostrará la evolución del error para las funciones según el número de puntos. Al igual que antes, N tomará valores desde 10 hasta 500. La normalización de las funciones se ha hecho mediante el método de Simpson para la integración numérica.\\
+
+    Cabe destacar que en esta ocasión se ha usado un gráfico de dispersión debido a las oscilaciones presentes en los valores de los datos. Para evitar llegar a conclusiones equivocadas se muestran los puntos y se relaciona con un ajuste conocido (logarítmico para el primer caso y lineal para el segundo).
+    
+   \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.9\textwidth]{fotos/errorr_funci_infinito_500.jpg}
+        \caption{Raíz del error cuadrático medio en las funciones (Error), según el número de puntos (N).}
+        \end{figure} 
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.9\textwidth]{fotos/logerror_funci_infinito_500.jpg}
+        \caption{Logaritmo de la raíz del error cuadrático medio en las funciones (~log(Error)~), según el logaritmo del número de puntos (~log(N)~).}
+        \end{figure}
     
     \subsection{Oscilador armónico cuántico}
 
@@ -1374,21 +1396,6 @@ Para resolverlo podemos usar por ejemplo el método de Runge-Kutta y como condic
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 \newpage
 \section{Anexo}
 \subsection{Códigos de MATLAB}
@@ -1405,5 +1412,7 @@ Este script inicial es \textit{THE\_MAIN.tex}, el cual a la hora de ejecutarse l
 
 \end{itemize}
 
+\nocite{*}
+\printbibliography
 
 \end{document}
