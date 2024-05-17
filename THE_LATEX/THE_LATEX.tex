@@ -1293,11 +1293,12 @@ Donde:
         \caption{Logaritmo de la raíz del error cuadrático medio en las energías (~log(Error)~), según el logaritmo del número de puntos (~log(h)~).}
         \end{figure}
 
-    \subsubsection{Error en las funciones}
-
-        \subsubsection{Error en las funciones}
-
-    Y ahora se mostrará la evolución del error para las funciones según el número de puntos. Al igual que antes, N tomará valores desde 10 hasta 500. La normalización de las funciones se ha hecho mediante el método de Simpson para la integración numérica.\\
+\subsubsection{Error en las funciones}
+Y ahora se mostrará la evolución del error 
+para las funciones según el número de puntos. 
+Al igual que antes, N tomará valores desde 10 hasta 500.
+La normalización de las funciones se ha hecho mediante 
+el método de Simpson para la integración numérica.\\
 
     Cabe destacar que en esta ocasión se ha usado un gráfico de dispersión debido a las oscilaciones presentes en los valores de los datos. Para evitar llegar a conclusiones equivocadas se muestran los puntos y se relaciona con un ajuste conocido (logarítmico para el primer caso y lineal para el segundo).
     
@@ -1346,8 +1347,59 @@ Donde:
         \includegraphics[width=0.9\textwidth]{errorfuncionsegunpasoN500log.jpg}
         \caption{Logaritmo de la raíz del error cuadrático medio en las funciones (~log(Error)~), según el  logaritmo del paso (~log(h)~).}
         \end{figure}  
-        
-    \subsection{Métodos de integración}
+\subsection{Pozo de potencial finito}
+\subsubsection{Error en las energías}
+Como ya se ha comentado en repetidas ocasiones, las energías 
+que se presentan como analíticas son una aproximación ya que 
+no hay ninguna forma de obtener su valor numérico. Por esta
+razón, el error que obteníamos era bastante alto en comparación
+con los otros dos potenciales. \\
+\par
+Por este motivo, hemos decido no hacer un análisis de errores
+según el paso va cambiando para las energías debido a que al 
+no tener una solución real $100\%$ precisa el error va bajando
+como es lógico pero nunca va a llegar a 0. Es por esto que 
+hemos considerado que no tiene sentido comparar un método numérico
+con una aproximación ya que, evidentemente, jamás el error 
+convergerá a 0.
+\subsubsection{Error en las funciones}
+Para este apartado sí disponemos de soluciones exactas y es 
+por ello vamos a realizar su correspondiente estudio de la 
+evolución del error. \\
+\par
+Para realizar este estudio, al igual que en el resto de secciones, 
+se ha decidido usar el método de Simpson para normalizar las 
+autofunciones y un N que abarca los valores de 10 a 500. 
+También, al igual que sucedía en el pozo de potencial 
+infinito, nuestras soluciones presentas oscilaciones y hemos 
+vuelto a usar un gráfico de dispersión al que le hemos realizado 
+un ajuste.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{func_finito.jpg}
+    \caption{Raíz del error cuadrático medio en las funciones (Error), según el paso (h).}
+\end{figure}    
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{log_func_finito.jpg}
+    \caption{Logaritmo de la raíz del error cuadrático medio en las funciones (~log(Error)~), según el  logaritmo del paso (~log(h)~).}
+\end{figure}  
+Como se puede apreciar, en la primera gráfica podemos concluir
+que, a pesar de que el ajuste que se haya usado ha sido uno 
+cuadrático, el error se comporta como cabría esperar (logarírimico).
+Sin embargo, por algunos datos atípicos, esa forma que cabría esperar
+encontrarse se deforma un poco. \\
+\par 
+Por otra parte, si nos fijamos en el error en logaritmos, 
+vemos que una linea recta lo aproxima muy bien. Con lo cual, 
+podemos considerar como acertado los métodos de integración usados
+para normalizar. \\
+\par 
+Por último, cabe destacar que se puede ver que si siguiéramos 
+aumentando el número de puntos usados, el error acabaría llegando 
+a 0. Con lo cual, podemos estar satisfechos con los resultados 
+obtenidos.
+\subsection{Métodos de integración}
 
     Esta sección es de verdadero interés pues representa un tipo de inconveniente que nos hemos encontrado realizando el trabajo. Nuestro código es capaz de realizar la normalización de las autofunciones tanto con el método de los trapecios como con el de Simpson. Sin embargo, cuando representamos la convergencia de uno frente a la de otra nos encontramos con lo siguiente:
 
