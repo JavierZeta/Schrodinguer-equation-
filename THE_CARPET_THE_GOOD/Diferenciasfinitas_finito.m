@@ -1,4 +1,4 @@
-function[energies,vec,h] = Diferenciasfinitas_finito(a,b,N,numerovec) %tetas
+function[energies,vec,h] = Diferenciasfinitas_finito(a,b,N,numerovec)
 % Discretizamos el espacio
 x = linspace(a, b, N);
 %calculamos nuestro paso
